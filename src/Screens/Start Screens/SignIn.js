@@ -1,5 +1,4 @@
-import React from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -7,127 +6,118 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
-  Dimensions,
-  ScrollResponderEvent,
-  ScrollView,
-  ScrollViewComponent,
   Image,
-  useState,
+  Alert,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "@expo/vector-icons/MaterialIcons";
 import * as Animatable from "react-native-animatable";
 import Feather from "@expo/vector-icons/Feather";
-
 import { StatusBar } from "expo-status-bar";
-import UserAuth from "./src/api/UserAuth";
+import Users from "../../../modal/users";
+import { ScrollView } from "react-native-gesture-handler";
 
-const SignUp = ({ navigation }) => {
+const emailValidator = (email) => {
+  const re = /\S+@\S+\.\S+/;
+  if (!email) return "Email can't be empty.";
+  if (!re.test(email)) return "Ooops! We need a valid email address.";
+  return "";
+};
+const passwordValidator = (password) => {
+  if (!password) return "Password can't be empty.";
+  if (password.length < 8)
+    return "Password must be at least 8 characters long.";
+  return "";
+};
+
+const SignIn = ({ navigation }) => {
   const [data, setData] = React.useState({
     email: "",
     password: "",
-    confirm_password: "",
-    Contact: "",
     check_textInputChange: false,
     secureTextEntry: true,
-    confirm_secureTextEntry: true,
+    isValidUser: true,
+    isValidPassword: true,
   });
-
-  async function loginApi(name, email, password, cPassword) {
-    try {
-      const response = await axios.post(
-        "http://127.0.0.1:5500/"
-        // {
-        //   name,
-        //   email,
-        //   password,
-        //   cPassword,
-        // }
-      );
-      console.log("response", response);
-      return response;
-    } catch (err) {
-      console.log("ERROROOROR", err);
-      // setErrorMessage("Something went Wrong");
-    }
-  }
-
-  const signUp = async () => {
-    const status = await loginApi(
-      "abc",
-      data.email,
-      data.password,
-      data.confirm_password
-    );
-    console.log("staus", status);
-  };
+  const [errorEmailMessage, setEmailErrorMessage] = useState("");
+  const [errorPasswordMessage, setPasswordErrorMessage] = useState("");
 
   const textInputChange = (value) => {
-    if (value.length !== 0) {
+    if (emailValidator(value) == "") {
       setData({
         ...data,
         email: value,
         check_textInputChange: true,
+        isValidUser: true,
       });
     } else {
       setData({
         ...data,
         email: value,
         check_textInputChange: false,
+        isValidUser: false,
       });
+      setEmailErrorMessage(emailValidator(value));
     }
   };
   const handlePasswordChange = (value) => {
-    setData({
-      ...data,
-      password: value,
-    });
+    if (passwordValidator(value) == "") {
+      setData({
+        ...data,
+        password: value,
+        isValidPassword: true,
+      });
+    } else {
+      setData({
+        ...data,
+        password: value,
+        isValidPassword: false,
+      });
+      setPasswordErrorMessage(passwordValidator(value));
+    }
   };
 
-  const handleConfirmPasswordChange = (value) => {
-    setData({
-      ...data,
-      confirm_password: value,
-    });
-  };
   const updateSecureTextEntry = () => {
     setData({
       ...data,
       secureTextEntry: !data.secureTextEntry,
     });
   };
+  const handleValidUser = (val) => {
+    if (val.trim().length >= 4) {
+      setData({
+        ...data,
+        isValidUser: true,
+      });
+    } else {
+      setData({
+        ...data,
+        isValidUser: false,
+      });
+    }
+  };
+  const OnSignInPressed = () => {};
 
-  const updateConfirmSecureTextEntry = () => {
-    setData({
-      ...data,
-      confirm_secureTextEntry: !data.confirm_secureTextEntry,
-    });
-  };
-  const ContactChange = (value) => {
-    setData({
-      ...data,
-      Contact: value,
-    });
-  };
   return (
     <ScrollView>
       <LinearGradient colors={["#052A37", "#12DFEB"]} style={styles.container}>
         <StatusBar />
-        <Animatable.View animation="fadeIn" duration={2000}>
-          <Image
-            style={{
-              tintColor: "white",
-              marginLeft: 120,
-              marginTop: 50,
-              width: 150,
-              height: 150,
-            }}
-            source={require("./images/add-user.png")}
-          />
-        </Animatable.View>
-        <View style={styles.header} />
+        <View style={styles.header}>
+          <Animatable.View animation="fadeIn" duration={2000}>
+            <Image
+              style={{
+                tintColor: "white",
+                marginLeft: 90,
+                marginTop: 50,
+                width: 200,
+                height: 200,
+              }}
+              source={require("../../../images/loginpage.png")}
+            />
+          </Animatable.View>
+        </View>
         <Animatable.View animation="fadeInUpBig" style={styles.footer}>
-          <Text style={styles.text_header}>SignUp </Text>
+          <Text style={styles.text_header}>Login</Text>
 
           <Text style={styles.text_footer}>Email</Text>
           <View style={styles.action}>
@@ -137,11 +127,18 @@ const SignUp = ({ navigation }) => {
               placeholder="Email"
               autoCapitalize="none"
               onChangeText={(value) => textInputChange(value)}
+              onEndEditing={(e) => handleValidUser(e.nativeEvent.text)}
             />
             {data.check_textInputChange ? (
               <Feather name="check-circle" color="green" size={20} />
             ) : null}
           </View>
+          {data.isValidUser ? null : (
+            <Animatable.View animation="fadeInLeft" duration={500}>
+              <Text style={styles.errorMsg}>{errorEmailMessage}</Text>
+            </Animatable.View>
+          )}
+
           <Text style={[styles.text_footer, { marginTop: 20 }]}>Password</Text>
 
           <View style={styles.action}>
@@ -161,52 +158,27 @@ const SignUp = ({ navigation }) => {
               )}
             </TouchableOpacity>
           </View>
-          <Text style={[styles.text_footer, { marginTop: 20 }]}>
-            Confirm Password
-          </Text>
-
-          <View style={styles.action}>
-            <Icon color="grey" name="lock-outline" size={25} />
-            <TextInput
-              style={styles.textInput}
-              secureTextEntry={data.confirm_secureTextEntry ? true : false}
-              placeholder="Confirm Your Password"
-              autoCapitalize="none"
-              onChangeText={(value) => handleConfirmPasswordChange(value)}
-            />
-            <TouchableOpacity onPress={updateConfirmSecureTextEntry}>
-              {data.confirm_secureTextEntry ? (
-                <Feather name="eye-off" color="grey" size={20} />
-              ) : (
-                <Feather name="eye" color="grey" size={20} />
-              )}
-            </TouchableOpacity>
-          </View>
-          <Text style={[styles.text_footer, { marginTop: 20 }]}>Contact </Text>
-          <View style={styles.action}>
-            <Icon color="grey" name="phone" size={25} />
-            <TextInput
-              style={styles.textInput}
-              placeholder="Contact No"
-              autoCapitalize="none"
-              onChangeText={(value) => ContactChange(value)}
-            />
-          </View>
+          {data.isValidPassword ? null : (
+            <Animatable.View animation="fadeInLeft" duration={500}>
+              <Text style={styles.errorMsg}>{errorPasswordMessage}</Text>
+            </Animatable.View>
+          )}
 
           <View style={styles.button}>
-            <TouchableOpacity onPress={signUp}>
+            <TouchableOpacity style={styles.SignIn} onPress={OnSignInPressed}>
               <LinearGradient style={styles.SignIn} colors={["grey", "teal"]}>
-                <Text style={styles.textSign}>SignUp</Text>
+                <Text style={styles.textSign}>SignIn</Text>
               </LinearGradient>
             </TouchableOpacity>
+
             <TouchableOpacity
               style={[
                 styles.SignIn,
                 { borderColor: "grey", borderWidth: 1, marginTop: 15 },
               ]}
-              onPress={() => navigation.navigate("SignInScreen")}
+              onPress={() => navigation.navigate("SignUpScreen")}
             >
-              <Text style={[styles.textSign, { color: "teal" }]}>SignIn</Text>
+              <Text style={[styles.textSign, { color: "teal" }]}>SignUp</Text>
             </TouchableOpacity>
           </View>
         </Animatable.View>
@@ -215,22 +187,22 @@ const SignUp = ({ navigation }) => {
   );
 };
 
-export default SignUp;
+export default SignIn;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "teal",
   },
   header: {
-    height: 50,
+    height: 250,
     justifyContent: "flex-end",
     paddingHorizontal: 20,
     paddingBottom: 50,
+    marginTop: 70,
   },
   footer: {
-    flex: 1,
-    height: 580,
-    resizeMode: "cover",
+    height: 550,
     backgroundColor: "white",
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
@@ -272,9 +244,12 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     color: "grey",
   },
+  errorMsg: {
+    color: "red",
+  },
   button: {
     alignItems: "center",
-    marginTop: 20,
+    marginTop: 50,
   },
 
   SignIn: {

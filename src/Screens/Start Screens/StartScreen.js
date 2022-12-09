@@ -19,9 +19,8 @@ const StartScreen = ({ navigation }) => {
     <LinearGradient colors={["white", "white"]} style={styles.container}>
       <View style={styles.header}>
         <Image
-          source={require("./images/mountain.jpg")}
+          source={require("../../../images/mountain.jpg")}
           style={styles.logo}
-          resizeMode="stretch"
         />
       </View>
       <Animatable.View animation="fadeInUpBig" style={styles.footer}>
@@ -52,11 +51,10 @@ export default StartScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: "100%",
   },
   header: {
     flex: 2,
-    justifyContent: "center",
-    alignItems: "center",
   },
   footer: {
     height: 250,
@@ -68,10 +66,8 @@ const styles = StyleSheet.create({
   },
 
   logo: {
-    marginLeft: 35,
-    marginTop: 26,
-    width: 450,
-    height: 660,
+    width: "100%",
+    height: "100%",
   },
 
   title: {

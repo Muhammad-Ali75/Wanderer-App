@@ -14,7 +14,8 @@ import {
 import Icon from "@expo/vector-icons/MaterialIcons";
 import { LinearGradient } from "expo-linear-gradient";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
-import { AuthContext } from "./components/context";
+
+
 export function DrawerContent(props) {
   const [isDarkTheme, setIsDarkTheme] = React.useState(false);
   const { signOut } = React.useContext(AuthContext);

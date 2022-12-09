@@ -1,17 +1,14 @@
 import React from "react";
-import { useEffect } from "react";
-import { View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import StartScreensStack from "./src/Screens/Start Screens/StartScreenStack";
+import { Provider as AuthProvider } from "./src/Context/AuthContext";
 import MainTabScreen from "./MainTabScreen";
 import Bookmark from "./Bookmark";
 import Settings from "./Settings";
-import GetInScreens from "./GetInScreens";
+
 import { DrawerContent } from "./DrawerContent";
-import { AuthContext } from "./components/context";
-import { ActivityIndicator } from "react-native-paper";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import Users from "./modal/users";
+
 import { LogBox } from "react-native";
 import DetailsScreenLahore from "./DetailScreens/DetailsScreenLahore copy 2";
 import DetailsScreenIsl from "./DetailScreens/DetailsScreenIsl";
@@ -37,117 +34,14 @@ import R3p2 from "./DetailScreens/InnerProducts/R3p2";
 import HomeScreen from "./HomeScreen";
 
 LogBox.ignoreLogs(["EventEmitter.removeListener"]);
+
 const Drawer = createDrawerNavigator();
 
 export default function App() {
-  // const [isLoading, setIsLoading] = React.useState(true);
-  // const [userToken, setUserToken] = React.useState(null);
-
-  const initialLoginState = {
-    isLoading: true,
-    username: null,
-    userToken: null,
-  };
-
-  const loginReducer = (prevState, action) => {
-    switch (action.type) {
-      case "RETRIEVE_TOKEN":
-        return {
-          ...prevState,
-          userToken: action.token,
-          isLoading: false,
-        };
-      case "LOGIN":
-        return {
-          ...prevState,
-          username: action.id,
-          userToken: action.token,
-          isLoading: false,
-        };
-      case "LOGOUT":
-        return {
-          ...prevState,
-          username: null,
-          userToken: null,
-          isLoading: false,
-        };
-      case "REGISTER":
-        return {
-          ...prevState,
-          userName: action.id,
-          userToken: action.token,
-          isLoading: false,
-        };
-    }
-  };
-  const [loginState, dispatch] = React.useReducer(
-    loginReducer,
-    initialLoginState
-  );
-
-  const authContext = React.useMemo(
-    () => ({
-      signIn: async (foundUser) => {
-        // setUserToken("dfg");
-        // setIsLoading(false);
-        const userToken = String(foundUser[0].userToken);
-        const userName = foundUser[0].username;
-        try {
-          await AsyncStorage.setItem("userToken", userToken);
-        } catch (e) {
-          console.log(e);
-        }
-        // console.log("user token : ", userToken);
-        dispatch({ type: "LOGIN", id: userName, token: userToken });
-      },
-      signOut: async () => {
-        // setUserToken(null);
-        // setIsLoading(false);
-        try {
-          await AsyncStorage.removeItem("userToken");
-        } catch (e) {
-          console.log(e);
-        }
-
-        dispatch({ type: "LOGOUT" });
-      },
-
-      signUp: () => {
-        // setUserToken("dfg");
-        // setIsLoading(false);
-      },
-    }),
-    []
-  );
-  useEffect(() => {
-    setTimeout(async () => {
-      // setIsLoading(false);
-      let userToken;
-      userToken = null;
-      try {
-        userToken = await AsyncStorage.getItem("userToken");
-      } catch (e) {
-        console.log(e);
-      }
-
-      // console.log("user token : ", userToken);
-
-      dispatch({ type: "RETRIEVE_TOKEN", token: userToken });
-    }, 1000);
-  }, []);
-
-  if (loginState.isLoading) {
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator size="large" />
-      </View>
-    );
-  }
-
   return (
-    <AuthContext.Provider value={authContext}>
+    <AuthProvider>
       <NavigationContainer>
-        {loginState.userToken !== null ? (
+        {false ? (
           <Drawer.Navigator
             drawerContent={(props) => <DrawerContent {...props} />}
           >
@@ -191,9 +85,9 @@ export default function App() {
             <Drawer.Screen name="R3p2" component={R3p2} />
           </Drawer.Navigator>
         ) : (
-          <GetInScreens />
+          <StartScreensStack />
         )}
       </NavigationContainer>
-    </AuthContext.Provider>
+    </AuthProvider>
   );
 }
