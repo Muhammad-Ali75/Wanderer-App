@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   View,
   Text,
@@ -14,8 +14,8 @@ import Icon from "@expo/vector-icons/MaterialIcons";
 import * as Animatable from "react-native-animatable";
 import Feather from "@expo/vector-icons/Feather";
 import { StatusBar } from "expo-status-bar";
-import Users from "../../../modal/users";
 import { ScrollView } from "react-native-gesture-handler";
+import { Context as AuthContext } from "../../Context/AuthContext";
 
 const emailValidator = (email) => {
   const re = /\S+@\S+\.\S+/;
@@ -31,6 +31,7 @@ const passwordValidator = (password) => {
 };
 
 const SignIn = ({ navigation }) => {
+  const { state, signin } = useContext(AuthContext);
   const [data, setData] = React.useState({
     email: "",
     password: "",
@@ -96,7 +97,14 @@ const SignIn = ({ navigation }) => {
       });
     }
   };
-  const OnSignInPressed = () => {};
+  const OnSignInPressed = async () => {
+    try {
+      const response = await wandererApi.get();
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <ScrollView>
@@ -107,7 +115,7 @@ const SignIn = ({ navigation }) => {
             <Image
               style={{
                 tintColor: "white",
-                marginLeft: 90,
+                alignSelf: "center",
                 marginTop: 50,
                 width: 200,
                 height: 200,
@@ -165,7 +173,12 @@ const SignIn = ({ navigation }) => {
           )}
 
           <View style={styles.button}>
-            <TouchableOpacity style={styles.SignIn} onPress={OnSignInPressed}>
+            <TouchableOpacity
+              style={styles.SignIn}
+              onPress={() => {
+                signin({ email: data.email, password: data.password });
+              }}
+            >
               <LinearGradient style={styles.SignIn} colors={["grey", "teal"]}>
                 <Text style={styles.textSign}>SignIn</Text>
               </LinearGradient>

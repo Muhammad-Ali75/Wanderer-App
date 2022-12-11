@@ -1,5 +1,5 @@
-import React from "react";
-import axios from "axios";
+import React, { useState, useContext } from "react";
+
 import {
   View,
   Text,
@@ -7,86 +7,84 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
-  Dimensions,
-  ScrollResponderEvent,
   ScrollView,
-  ScrollViewComponent,
   Image,
-  useState,
 } from "react-native";
+import { Context as AuthContext } from "../../Context/AuthContext";
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "@expo/vector-icons/MaterialIcons";
 import * as Animatable from "react-native-animatable";
 import Feather from "@expo/vector-icons/Feather";
+import { MaterialIcons } from "@expo/vector-icons";
 
 import { StatusBar } from "expo-status-bar";
 
+const emailValidator = (email) => {
+  const re = /\S+@\S+\.\S+/;
+  if (!email) return "Email can't be empty.";
+  if (!re.test(email)) return "Ooops! We need a valid email address.";
+  return "";
+};
+const passwordValidator = (password) => {
+  if (!password) return "Password can't be empty.";
+  if (password.length < 8)
+    return "Password must be at least 8 characters long.";
+  return "";
+};
+
 const SignUp = ({ navigation }) => {
+  const { state, signup } = useContext(AuthContext);
   const [data, setData] = React.useState({
     email: "",
     password: "",
-    confirm_password: "",
+    name: "",
     Contact: "",
     check_textInputChange: false,
     secureTextEntry: true,
     confirm_secureTextEntry: true,
   });
-
-  async function loginApi(name, email, password, cPassword) {
-    try {
-      const response = await axios.post(
-        "http://127.0.0.1:5500/"
-        // {
-        //   name,
-        //   email,
-        //   password,
-        //   cPassword,
-        // }
-      );
-      console.log("response", response);
-      return response;
-    } catch (err) {
-      console.log("ERROROOROR", err);
-      // setErrorMessage("Something went Wrong");
-    }
-  }
-
-  const signUp = async () => {
-    const status = await loginApi(
-      "abc",
-      data.email,
-      data.password,
-      data.confirm_password
-    );
-    console.log("staus", status);
-  };
+  const [errorEmailMessage, setEmailErrorMessage] = useState("");
+  const [errorPasswordMessage, setPasswordErrorMessage] = useState("");
 
   const textInputChange = (value) => {
-    if (value.length !== 0) {
+    if (emailValidator(value) == "") {
       setData({
         ...data,
         email: value,
         check_textInputChange: true,
+        isValidUser: true,
       });
     } else {
       setData({
         ...data,
         email: value,
         check_textInputChange: false,
+        isValidUser: false,
       });
+      setEmailErrorMessage(emailValidator(value));
     }
   };
   const handlePasswordChange = (value) => {
-    setData({
-      ...data,
-      password: value,
-    });
+    if (passwordValidator(value) == "") {
+      setData({
+        ...data,
+        password: value,
+        isValidPassword: true,
+      });
+    } else {
+      setData({
+        ...data,
+        password: value,
+        isValidPassword: false,
+      });
+      setPasswordErrorMessage(passwordValidator(value));
+    }
   };
 
-  const handleConfirmPasswordChange = (value) => {
+  const textNameChange = (value) => {
     setData({
       ...data,
-      confirm_password: value,
+      name: value,
     });
   };
   const updateSecureTextEntry = () => {
@@ -96,12 +94,6 @@ const SignUp = ({ navigation }) => {
     });
   };
 
-  const updateConfirmSecureTextEntry = () => {
-    setData({
-      ...data,
-      confirm_secureTextEntry: !data.confirm_secureTextEntry,
-    });
-  };
   const ContactChange = (value) => {
     setData({
       ...data,
@@ -116,8 +108,8 @@ const SignUp = ({ navigation }) => {
           <Image
             style={{
               tintColor: "white",
-              marginLeft: 120,
               marginTop: 50,
+              alignSelf: "center",
               width: 150,
               height: 150,
             }}
@@ -128,12 +120,25 @@ const SignUp = ({ navigation }) => {
         <Animatable.View animation="fadeInUpBig" style={styles.footer}>
           <Text style={styles.text_header}>SignUp </Text>
 
-          <Text style={styles.text_footer}>Email</Text>
+          <Text style={styles.text_footer}>Name</Text>
           <View style={styles.action}>
             <Icon color="grey" name="person-outline" size={25} />
             <TextInput
               style={styles.textInput}
+              placeholder="Name"
+              autoCapitalize="words"
+              maxLength={32}
+              onChangeText={(value) => textNameChange(value)}
+            />
+          </View>
+
+          <Text style={styles.text_footer}>Email</Text>
+          <View style={styles.action}>
+            <MaterialIcons name="mail-outline" size={26} color="grey" />
+            <TextInput
+              style={styles.textInput}
               placeholder="Email"
+              keyboardType="email-address"
               autoCapitalize="none"
               onChangeText={(value) => textInputChange(value)}
             />
@@ -141,14 +146,20 @@ const SignUp = ({ navigation }) => {
               <Feather name="check-circle" color="green" size={20} />
             ) : null}
           </View>
-          <Text style={[styles.text_footer, { marginTop: 20 }]}>Password</Text>
+          {emailValidator(data.email) !== "" ? (
+            <Animatable.View animation="fadeInLeft" duration={500}>
+              <Text style={styles.errorMsg}>{errorEmailMessage}</Text>
+            </Animatable.View>
+          ) : null}
 
+          <Text style={styles.text_footer}>Password</Text>
           <View style={styles.action}>
             <Icon color="grey" name="lock-outline" size={25} />
             <TextInput
               style={styles.textInput}
               secureTextEntry={data.secureTextEntry ? true : false}
               placeholder="Password"
+              maxLength={32}
               autoCapitalize="none"
               onChangeText={(value) => handlePasswordChange(value)}
             />
@@ -160,42 +171,37 @@ const SignUp = ({ navigation }) => {
               )}
             </TouchableOpacity>
           </View>
-          <Text style={[styles.text_footer, { marginTop: 20 }]}>
-            Confirm Password
-          </Text>
+          {passwordValidator(data.password) !== "" ? (
+            <Animatable.View animation="fadeInLeft" duration={500}>
+              <Text style={styles.errorMsg}>{errorPasswordMessage}</Text>
+            </Animatable.View>
+          ) : null}
 
-          <View style={styles.action}>
-            <Icon color="grey" name="lock-outline" size={25} />
-            <TextInput
-              style={styles.textInput}
-              secureTextEntry={data.confirm_secureTextEntry ? true : false}
-              placeholder="Confirm Your Password"
-              autoCapitalize="none"
-              onChangeText={(value) => handleConfirmPasswordChange(value)}
-            />
-            <TouchableOpacity onPress={updateConfirmSecureTextEntry}>
-              {data.confirm_secureTextEntry ? (
-                <Feather name="eye-off" color="grey" size={20} />
-              ) : (
-                <Feather name="eye" color="grey" size={20} />
-              )}
-            </TouchableOpacity>
-          </View>
-          <Text style={[styles.text_footer, { marginTop: 20 }]}>Contact </Text>
+          <Text style={styles.text_footer}>Contact </Text>
           <View style={styles.action}>
             <Icon color="grey" name="phone" size={25} />
             <TextInput
               style={styles.textInput}
-              placeholder="Contact No"
+              placeholder="+92 XXX XXXXXXX"
               autoCapitalize="none"
+              keyboardType="phone-pad"
+              maxLength={13}
               onChangeText={(value) => ContactChange(value)}
             />
           </View>
 
           <View style={styles.button}>
-            <TouchableOpacity onPress={signUp}
-            style={
-              styles.SignIn}>
+            <TouchableOpacity
+              onPress={() => {
+                signup({
+                  name: data.name,
+                  email: data.email,
+                  password: data.password,
+                  cpassword: data.password,
+                });
+              }}
+              style={styles.SignIn}
+            >
               <LinearGradient style={styles.SignIn} colors={["grey", "teal"]}>
                 <Text style={styles.textSign}>SignUp</Text>
               </LinearGradient>
@@ -248,6 +254,7 @@ const styles = StyleSheet.create({
   text_footer: {
     color: "grey",
     fontSize: 15,
+    marginTop: 10,
   },
 
   title: {
@@ -289,5 +296,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     color: "white",
+  },
+  errorMsg: {
+    color: "red",
   },
 });
