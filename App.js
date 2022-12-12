@@ -41,7 +41,7 @@ export default function App() {
   return (
     <AuthProvider>
       <NavigationContainer>
-        {false ? (
+        {true ? (
           <Drawer.Navigator
             drawerContent={(props) => <DrawerContent {...props} />}
           >

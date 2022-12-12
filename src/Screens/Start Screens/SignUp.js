@@ -9,6 +9,7 @@ import {
   TextInput,
   ScrollView,
   Image,
+  Alert,
 } from "react-native";
 import { Context as AuthContext } from "../../Context/AuthContext";
 import { LinearGradient } from "expo-linear-gradient";
@@ -45,6 +46,10 @@ const SignUp = ({ navigation }) => {
   });
   const [errorEmailMessage, setEmailErrorMessage] = useState("");
   const [errorPasswordMessage, setPasswordErrorMessage] = useState("");
+
+  if (state.errorMessage != "") {
+    Alert(state.errorMessage);
+  }
 
   const textInputChange = (value) => {
     if (emailValidator(value) == "") {

@@ -1,8 +1,13 @@
 import createDataContext from "./createDataContext";
 import wandererApi from "../api/Wanderer";
+import * as SecureStore from "expo-secure-store";
 
-const authReducer = (state, actions) => {
-  switch (actions.type) {
+const authReducer = (state, action) => {
+  switch (action.type) {
+    case "add_error":
+      return { ...state, errorMessage: action.payload };
+    case "signIn":
+      return { token: action.payload, errorMessage: "" };
     default: {
       return state;
     }
@@ -22,6 +27,10 @@ const signup = (dispatch) => {
       console.log(response.data);
     } catch (error) {
       console.log(error);
+      dispatch({
+        type: "add_error",
+        payload: "Something went wrong with SignUp",
+      });
     }
   };
 };
@@ -33,7 +42,15 @@ const signin = (dispatch) => {
         email,
         password,
       });
-      console.log(response.data);
+      console.log(JSON.stringify(response.data));
+      await SecureStore.setItemAsync(
+        "Current_User",
+        JSON.stringify(response.data)
+      );
+      dispatch({
+        type: "signIn",
+        payload: JSON.stringify(response.data),
+      });
     } catch (error) {
       console.log(error);
     }
@@ -46,5 +63,5 @@ const signout = (dispatch) => {
 export const { Provider, Context } = createDataContext(
   authReducer,
   { signin, signout, signup },
-  { isSignedIn: false }
+  { token: null, errorMessage: "" }
 );

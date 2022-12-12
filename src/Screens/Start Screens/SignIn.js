@@ -42,6 +42,10 @@ const SignIn = ({ navigation }) => {
   const [errorEmailMessage, setEmailErrorMessage] = useState("");
   const [errorPasswordMessage, setPasswordErrorMessage] = useState("");
 
+  if (state.errorMessage != "") {
+    Alert(state.errorMessage);
+  }
+
   const textInputChange = (value) => {
     if (emailValidator(value) == "") {
       setData({
