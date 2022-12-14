@@ -14,6 +14,12 @@ const authReducer = (state, action) => {
   }
 };
 
+const tryLocalSignin = (dispatch) => async () => {
+  const token = await SecureStore.getItemAsync("Current_User");
+  if (token) {
+    dispatch({ type: "signin", payload: token });
+  }
+};
 const signup = (dispatch) => {
   return async ({ name, email, password, cpassword }) => {
     console.log("Auth", name, email, password, cpassword);
@@ -62,6 +68,6 @@ const signout = (dispatch) => {
 
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { signin, signout, signup },
+  { signin, signout, signup, tryLocalSignin },
   { token: null, errorMessage: "" }
 );

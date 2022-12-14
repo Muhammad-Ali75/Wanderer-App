@@ -7,24 +7,24 @@ import StartScreen from "./StartScreen";
 
 const StartScreens = createStackNavigator();
 
-const StartScreenStack = ({ navigation }) => (
-  <StartScreens.Navigator>
-    <StartScreens.Screen
-      name="StartScreen"
-      component={StartScreen}
-      options={{ headerShown: false }}
-    />
-    <StartScreens.Screen
-      name="SignInScreen"
-      component={SignInScreen}
-      options={{ headerShown: false }}
-    />
-    <StartScreens.Screen
-      name="SignUpScreen"
-      component={SignUpScreen}
-      options={{ headerShown: false }}
-    />
-  </StartScreens.Navigator>
-);
-
-export default StartScreenStack;
+export const StartScreenStack = () => {
+  return (
+    <StartScreens.Navigator>
+      <StartScreens.Screen
+        name="StartScreen"
+        component={StartScreen}
+        options={{ headerShown: false }}
+      />
+      <StartScreens.Screen
+        name="SignInScreen"
+        component={SignInScreen}
+        options={{ headerShown: false }}
+      />
+      <StartScreens.Screen
+        name="SignUpScreen"
+        component={SignUpScreen}
+        options={{ headerShown: false }}
+      />
+    </StartScreens.Navigator>
+  );
+};
