@@ -15,6 +15,7 @@ import Feather from "@expo/vector-icons/Feather";
 import { StatusBar } from "expo-status-bar";
 import { ScrollView } from "react-native-gesture-handler";
 import { Context as AuthContext } from "../../Context/AuthContext";
+import { Dialog } from "@rneui/themed";
 
 const emailValidator = (email) => {
   const re = /\S+@\S+\.\S+/;
@@ -31,6 +32,7 @@ const passwordValidator = (password) => {
 
 const SignIn = ({ navigation }) => {
   const { state, signin } = useContext(AuthContext);
+  const [visible3, setVisible3] = useState(false);
   const [data, setData] = React.useState({
     email: "",
     password: "",
@@ -100,13 +102,8 @@ const SignIn = ({ navigation }) => {
       });
     }
   };
-  const OnSignInPressed = async () => {
-    try {
-      const response = await wandererApi.get();
-      console.log(response);
-    } catch (err) {
-      console.log(err);
-    }
+  const toggleDialog3 = () => {
+    setVisible3(!visible3);
   };
 
   return (
@@ -174,11 +171,14 @@ const SignIn = ({ navigation }) => {
               <Text style={styles.errorMsg}>{errorPasswordMessage}</Text>
             </Animatable.View>
           )}
-
+          <Dialog isVisible={visible3} onBackdropPress={toggleDialog3}>
+            <Dialog.Loading />
+          </Dialog>
           <View style={styles.button}>
             <TouchableOpacity
               style={styles.SignIn}
               onPress={() => {
+                toggleDialog3();
                 signin({ email: data.email, password: data.password });
               }}
             >

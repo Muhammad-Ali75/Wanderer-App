@@ -8,6 +8,8 @@ const authReducer = (state, action) => {
       return { ...state, errorMessage: action.payload };
     case "signIn":
       return { token: action.payload, errorMessage: "" };
+    case "signout":
+      return { ...state, token: action.payload };
     default: {
       return state;
     }
@@ -16,8 +18,8 @@ const authReducer = (state, action) => {
 
 const tryLocalSignin = (dispatch) => async () => {
   const token = await SecureStore.getItemAsync("Current_User");
-  if (token) {
-    dispatch({ type: "signin", payload: token });
+  if (token != null) {
+    dispatch({ type: "signIn", payload: token });
   }
 };
 const signup = (dispatch) => {
@@ -63,11 +65,14 @@ const signin = (dispatch) => {
   };
 };
 const signout = (dispatch) => {
-  return () => {};
+  return async () => {
+    await SecureStore.deleteItemAsync("Current_User");
+    dispatch({ type: "signout", payload: null });
+  };
 };
 
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { signin, signout, signup, tryLocalSignin },
+  { signin, signout, signup, tryLocalSignin, signout },
   { token: null, errorMessage: "" }
 );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { View, StyleSheet } from "react-native";
 import {
@@ -14,9 +14,11 @@ import {
 import Icon from "@expo/vector-icons/MaterialIcons";
 import { LinearGradient } from "expo-linear-gradient";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
+import { Context as AuthContext } from "./src/Context/AuthContext";
 
 export function DrawerContent(props) {
   const [isDarkTheme, setIsDarkTheme] = React.useState(false);
+  const { state, signout } = useContext(AuthContext);
 
   const toggleTheme = () => {
     setIsDarkTheme(!isDarkTheme);
@@ -117,7 +119,10 @@ export function DrawerContent(props) {
             <Icon name="exit-to-app" color={color} size={size} />
           )}
           label="Sign Out"
-          onPress={() => {}}
+          onPress={async () => {
+            await signout();
+            console.log(state);
+          }}
         />
       </Drawer.Section>
     </LinearGradient>

@@ -197,13 +197,14 @@ const SignUp = ({ navigation }) => {
 
           <View style={styles.button}>
             <TouchableOpacity
-              onPress={() => {
-                signup({
+              onPress={async () => {
+                await signup({
                   name: data.name,
                   email: data.email,
                   password: data.password,
                   cpassword: data.password,
                 });
+                navigation.navigate("SignInScreen");
               }}
               style={styles.SignIn}
             >
