@@ -22,7 +22,7 @@ const DetailsScreenLahore = ({ navigation }) => {
         <View style={{ width: "30%", paddingLeft: 20 }}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Image
-              source={require("../images/17.png")}
+              source={require("../images/backArrow.png")}
               style={{ marginVertical: 40 }}
             />
           </TouchableOpacity>

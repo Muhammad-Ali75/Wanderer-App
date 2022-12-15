@@ -28,7 +28,7 @@ const R1p2 = ({ navigation }) => {
         >
           <TouchableOpacity onPress={() => navigation.navigate("Products")}>
             <Image
-              source={require("../../images/17.png")}
+              source={require("../../images/backArrow.png")}
               style={{ marginTop: 0, marginLeft: 25 }}
             />
           </TouchableOpacity>

@@ -29,7 +29,7 @@ import R1p1 from "../../../DetailScreens/InnerProducts/R1p1";
 import R1p2 from "../../../DetailScreens/InnerProducts/R1p2";
 import R2p1 from "../../../DetailScreens/InnerProducts/R2p1";
 import R2p2 from "../../../DetailScreens/InnerProducts/R2p2";
-import R3p1 from "../../../DetailScreens/InnerProducts/R3p1";
+import ProductDetails from "../../../DetailScreens/VerticalComponents/ProductDetails";
 import R3p2 from "../../../DetailScreens/InnerProducts/R3p2";
 
 const Drawer = createDrawerNavigator();
@@ -64,7 +64,7 @@ export const DrawerScreenStack = () => {
       <Drawer.Screen name="R1p2" component={R1p2} />
       <Drawer.Screen name="R2p1" component={R2p1} />
       <Drawer.Screen name="R2p2" component={R2p2} />
-      <Drawer.Screen name="R3p1" component={R3p1} />
+      <Drawer.Screen name="ProductDetails" component={ProductDetails} />
       <Drawer.Screen name="R3p2" component={R3p2} />
     </Drawer.Navigator>
   );

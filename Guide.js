@@ -31,7 +31,7 @@ const Guide = ({ navigation }) => {
               width: "4%",
               height: 10,
             }}
-            source={require("./images/17.png")}
+            source={require("./images/backArrow.png")}
           />
         </TouchableOpacity>
         <View style={styles.header}>

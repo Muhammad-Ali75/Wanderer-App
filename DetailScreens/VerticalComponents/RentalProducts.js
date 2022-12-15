@@ -30,7 +30,7 @@ const RentalProducts = ({ navigation }) => {
         >
           <TouchableOpacity onPress={() => navigation.navigate("Products")}>
             <Image
-              source={require("../../images/17.png")}
+              source={require("../../images/backArrow.png")}
               style={{ marginTop: 40, width: 20, tintColor: "white" }}
             />
           </TouchableOpacity>
@@ -758,7 +758,7 @@ const RentalProducts = ({ navigation }) => {
               }}
             />
             <TouchableOpacity
-              onPress={() => navigation.navigate("R3p1")}
+              onPress={() => navigation.navigate("ProductDetails")}
               style={{
                 height: 250,
                 elevation: 2,

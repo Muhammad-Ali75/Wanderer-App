@@ -1,22 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 
-import {
-  View,
-  Text,
-  Button,
-  StyleSheet,
-  Dimensions,
-  Image,
-  StatusBar,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import Feather from "@expo/vector-icons/Feather";
 import * as Animatable from "react-native-animatable";
-import Swiper from "react-native-swiper";
 import { ScrollView } from "react-native-gesture-handler";
+import wandererApi from "../../src/api/Wanderer";
 
-const R3p1 = ({ navigation }) => {
+const ProductDetails = ({ route, navigation }) => {
+  const { productdetails } = route.params;
+
   return (
     <LinearGradient colors={["white", "white"]} style={styles.container}>
       <View style={styles.header}>
@@ -28,7 +20,7 @@ const R3p1 = ({ navigation }) => {
         >
           <TouchableOpacity onPress={() => navigation.navigate("Products")}>
             <Image
-              source={require("../../images/17.png")}
+              source={require("../../images/backArrow.png")}
               style={{ marginTop: 0, marginLeft: 25 }}
             />
           </TouchableOpacity>
@@ -56,7 +48,7 @@ const R3p1 = ({ navigation }) => {
         </ScrollView>
       </View>
       <Animatable.View animation="fadeInUpBig" style={styles.footer}>
-        <Text style={styles.title}>Nike Air Zoom</Text>
+        <Text style={styles.title}>{productdetails.name}</Text>
         <Text
           style={{
             color: "gold",
@@ -65,24 +57,17 @@ const R3p1 = ({ navigation }) => {
             marginTop: -28,
           }}
         >
-          {" "}
-          $240
+          {productdetails.price}
         </Text>
         <Text style={styles.text}> Reviews:</Text>
 
         <Text style={{ color: "gold", marginLeft: 60, marginTop: -19 }}>
-          {" "}
-          4.5 (2)
+          {"  "}4.8
         </Text>
         <Text style={{ marginTop: 10, marginLeft: 3, color: "white" }}>
           Description:
         </Text>
-        <Text style={styles.text}>
-          This is the best product we have in town right now at the moment, so
-          that you can enjoy the trip without any trouble this is the best
-          product we have in town right now at the moment, so that you can enjoy
-          the trip without any trouble.
-        </Text>
+        <Text style={styles.text}>{productdetails.discription}</Text>
 
         <View style={styles.button}>
           <TouchableOpacity>
@@ -99,7 +84,7 @@ const R3p1 = ({ navigation }) => {
   );
 };
 
-export default R3p1;
+export default ProductDetails;
 const styles = StyleSheet.create({
   container: {
     flex: 1,

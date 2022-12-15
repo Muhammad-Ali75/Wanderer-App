@@ -52,7 +52,7 @@ const HotelsMur = ({ navigation }) => {
                 width: "5%",
                 height: 13,
               }}
-              source={require("../../images/17.png")}
+              source={require("../../images/backArrow.png")}
             />
           </TouchableOpacity>
           <View
