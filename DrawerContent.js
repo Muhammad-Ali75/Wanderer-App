@@ -1,28 +1,14 @@
 import React, { useContext } from "react";
 
 import { View, StyleSheet } from "react-native";
-import {
-  Avatar,
-  Title,
-  Text,
-  TouchableRipple,
-  Switch,
-  Drawer,
-  Caption,
-  Paragraph,
-} from "react-native-paper";
+import { Avatar, Title, Drawer, Caption, Paragraph } from "react-native-paper";
 import Icon from "@expo/vector-icons/MaterialIcons";
 import { LinearGradient } from "expo-linear-gradient";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import { Context as AuthContext } from "./src/Context/AuthContext";
 
 export function DrawerContent(props) {
-  const [isDarkTheme, setIsDarkTheme] = React.useState(false);
   const { state, signout } = useContext(AuthContext);
-
-  const toggleTheme = () => {
-    setIsDarkTheme(!isDarkTheme);
-  };
   return (
     <LinearGradient colors={["#FBF8F8", "teal"]} style={styles.LinearGradient}>
       <DrawerContentScrollView {...props}>
@@ -95,21 +81,6 @@ export function DrawerContent(props) {
                 props.navigation.navigate("ExploreScreen");
               }}
             />
-          </Drawer.Section>
-
-          <Drawer.Section title="Preferences">
-            <TouchableRipple
-              onPress={() => {
-                toggleTheme();
-              }}
-            >
-              <View style={styles.preference}>
-                <Text>Dark Theme</Text>
-                <View pointerEvents="none">
-                  <Switch style={styles.switch} value={isDarkTheme} />
-                </View>
-              </View>
-            </TouchableRipple>
           </Drawer.Section>
         </View>
       </DrawerContentScrollView>

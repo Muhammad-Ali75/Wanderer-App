@@ -18,7 +18,7 @@ const ProductCard = ({ product }) => {
       />
       <View style={styles.container}>
         <Text style={styles.name}>{product.name}</Text>
-        <Text style={styles.price}>{product.price}</Text>
+        <Text style={styles.price}>Rs. {product.price}</Text>
       </View>
     </TouchableOpacity>
   );

@@ -1,25 +1,18 @@
 import React from "react";
-
-import { View, Text, Button } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Icon from "@expo/vector-icons/Ionicons";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 
 import homeScreen from "./HomeScreen";
-import ProfileScreen from "./ProfileScreen";
-import ExploreScreen from "./ExploreScreen";
-import Location from "./Location";
-import Bookmark from "./Bookmark";
-import Notification from "./Notifications";
-import Guide from "./Guide";
+
+import { FontAwesome5 } from "@expo/vector-icons";
+import HotelsLahore from "./DetailScreens/VerticalComponents/HotelsLahore";
 
 const HomeStack = createStackNavigator();
-const DetailsStack = createStackNavigator();
-const BookStack = createStackNavigator();
 
 const Tab = createMaterialBottomTabNavigator();
 const MainTabScreen = () => (
-  <Tab.Navigator initialRouteName="Home" activeColor="white">
+  <Tab.Navigator initialRouteName="Home" activeColor="white" shifting={true}>
     <Tab.Screen
       name="Home"
       component={HomeStackScreen}
@@ -33,37 +26,13 @@ const MainTabScreen = () => (
     />
     <Tab.Screen
       name="Details"
-      component={Notification}
+      component={HotelsLahore}
       options={{
-        tabBarLabel: "Updates",
-        tabBarColor: "black",
+        tabBarLabel: "Hotels",
+        tabBarColor: "#6B3940",
 
         tabBarIcon: ({ color }) => (
-          <Icon name="ios-notifications" color={color} size={26} />
-        ),
-      }}
-    />
-    <Tab.Screen
-      name="Profile"
-      component={Guide}
-      options={{
-        tabBarLabel: "Guide",
-        tabBarColor: "brown",
-
-        tabBarIcon: ({ color }) => (
-          <Icon name="ios-person" color={color} size={26} />
-        ),
-      }}
-    />
-    <Tab.Screen
-      name="Explore"
-      component={Location}
-      options={{
-        tabBarLabel: "Explore",
-        tabBarColor: "grey",
-
-        tabBarIcon: ({ color }) => (
-          <Icon name="search-outline" color={color} size={26} />
+          <FontAwesome5 name="hotel" size={24} color={color} />
         ),
       }}
     />
@@ -101,67 +70,4 @@ const HomeStackScreen = ({ navigation }) => (
       }}
     />
   </HomeStack.Navigator>
-);
-
-const DetailStackScreen = ({ navigation }) => (
-  <DetailsStack.Navigator
-    screenOptions={{
-      headerStyle: {
-        backgroundColor: "red",
-      },
-      headerTintColor: "white",
-      headerTitleStyle: {
-        fontWeight: "bold",
-      },
-    }}
-  >
-    <DetailsStack.Screen
-      name="Details"
-      component={""}
-      options={{
-        title: "Details Screen",
-        headerLeft: () => (
-          <Icon.Button
-            name="ios-menu"
-            size={25}
-            backgroundColor="red"
-            onPress={() => {
-              navigation.openDrawer();
-            }}
-          />
-        ),
-      }}
-    />
-  </DetailsStack.Navigator>
-);
-const BookmarkStackScreen = ({ navigation }) => (
-  <BookStack.Navigator
-    screenOptions={{
-      headerStyle: {
-        backgroundColor: "grey",
-      },
-      headerTintColor: "white",
-      headerTitleStyle: {
-        fontWeight: "bold",
-      },
-    }}
-  >
-    <BookStack.Screen
-      name="Bookmark "
-      component={Bookmark}
-      options={{
-        title: "BookMark",
-        headerLeft: () => (
-          <Icon.Button
-            name="ios-menu"
-            size={25}
-            backgroundColor="grey"
-            onPress={() => {
-              navigation.openDrawer();
-            }}
-          />
-        ),
-      }}
-    />
-  </BookStack.Navigator>
 );

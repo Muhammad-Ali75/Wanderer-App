@@ -1,13 +1,7 @@
 import React from "react";
-import { View, Text, Image, ImageBackground } from "react-native";
-import {
-  TextInput,
-  ScrollView,
-  TouchableOpacity,
-  StatusBar,
-} from "react-native";
+import { View, Text, Image } from "react-native";
+import { TextInput, ScrollView, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import DetailsScreenLahore from "./DetailScreens/DetailsScreenIsl";
 import * as Animatable from "react-native-animatable";
 
 const HomeScreen = ({ navigation }) => {

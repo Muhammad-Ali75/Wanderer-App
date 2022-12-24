@@ -4,7 +4,6 @@ import { ScrollView, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import ProductCard from "./ProductCard";
 import wandererApi from "../../src/api/Wanderer";
-import { productHunt } from "fontawesome";
 
 const Products = ({ navigation }) => {
   const [productData, setProductData] = useState(null);
@@ -24,67 +23,64 @@ const Products = ({ navigation }) => {
 
   return (
     <>
-      <ScrollView>
-        <View style={{ flex: 1 }}>
+      <View style={{ height: "30%" }}>
+        <View
+          style={{
+            backgroundColor: "#292929",
+            borderBottomLeftRadius: 20,
+            borderBottomRightRadius: 20,
+            paddingHorizontal: 20,
+          }}
+        >
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Image
+              source={require("../../images/backArrow.png")}
+              style={{ marginTop: 60, width: 20, tintColor: "white" }}
+            />
+          </TouchableOpacity>
+
           <View
             style={{
-              backgroundColor: "#292929",
-              flex: 1,
-              borderBottomLeftRadius: 20,
-              borderBottomRightRadius: 20,
-              paddingHorizontal: 20,
+              flexDirection: "row",
+              marginVertical: 70,
+              alignContent: "center",
             }}
           >
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Image
-                source={require("../../images/backArrow.png")}
-                style={{ marginTop: 60, width: 20, tintColor: "white" }}
-              />
-            </TouchableOpacity>
-
-            <View
+            <Text
               style={{
-                flexDirection: "row",
-                marginVertical: 70,
-                alignContent: "center",
+                fontSize: 28,
+                color: "#FFF",
+                fontWeight: "bold",
+                marginLeft: 10,
+                marginTop: 0,
               }}
             >
-              <Text
-                style={{
-                  fontSize: 28,
-                  color: "#FFF",
-                  fontWeight: "bold",
-                  marginLeft: 10,
-                  marginTop: 0,
-                }}
-              >
-                Get ready for your trip.
-              </Text>
+              Get ready for your trip.
+            </Text>
 
-              <Image
-                source={require("../../images/w2.jpg")}
-                style={{
-                  height: 60,
-                  width: 60,
-                  borderRadius: 30,
-                  marginLeft: 50,
-                  marginTop: -20,
-                }}
-              />
-            </View>
+            <Image
+              source={require("../../images/w2.jpg")}
+              style={{
+                height: 60,
+                width: 60,
+                borderRadius: 30,
+                marginLeft: 50,
+                marginTop: -20,
+              }}
+            />
           </View>
-          <LinearGradient
-            colors={["#292929", "transparent"]}
-            style={{
-              left: 0,
-              right: 0,
-              height: 90,
-              marginTop: -30,
-              marginBottom: 190,
-            }}
-          />
         </View>
-      </ScrollView>
+        <LinearGradient
+          colors={["#292929", "transparent"]}
+          style={{
+            left: 0,
+            right: 0,
+            height: 90,
+            marginTop: -30,
+            marginBottom: 190,
+          }}
+        />
+      </View>
       {productData && (
         <FlatList
           data={productData}

@@ -57,7 +57,7 @@ const ProductDetails = ({ route, navigation }) => {
             marginTop: -28,
           }}
         >
-          {productdetails.price}
+          Rs. {productdetails.price}
         </Text>
         <Text style={styles.text}> Reviews:</Text>
 

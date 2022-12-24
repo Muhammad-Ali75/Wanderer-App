@@ -1,14 +1,5 @@
 import React from "react";
-import {
-  View,
-  Text,
-  Image,
-  ImageBackground,
-  Button,
-  TextComponent,
-  StyleSheet,
-  StatusBar,
-} from "react-native";
+import { View, Text, Image, StyleSheet } from "react-native";
 import {
   TextInput,
   ScrollView,
