@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import * as Animatable from "react-native-animatable";
 import { ScrollView } from "react-native-gesture-handler";
-import wandererApi from "../../src/api/Wanderer";
 
 const ProductDetails = ({ route, navigation }) => {
   const { productdetails } = route.params;

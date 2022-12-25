@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Image, FlatList } from "react-native";
-import { ScrollView, TouchableOpacity } from "react-native";
+import { View, Text, Image, FlatList, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import ProductCard from "./ProductCard";
 import wandererApi from "../../src/api/Wanderer";
