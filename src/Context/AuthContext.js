@@ -1,5 +1,5 @@
 import createDataContext from "./createDataContext";
-import wandererApi from "../api/Wanderer";
+import wandererApi from "../API/Wanderer";
 import * as SecureStore from "expo-secure-store";
 
 const authReducer = (state, action) => {

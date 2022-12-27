@@ -1,10 +1,9 @@
 import React from "react";
 import { Image, StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 
 const HotelCard = ({ name, city, price, id, image }) => {
   return (
-    <View style={styles.card}>
+    <TouchableOpacity style={styles.card} onPress={() => {}}>
       <Image source={{ uri: image }} style={styles.image} />
       <View style={styles.info}>
         <View>
@@ -19,22 +18,15 @@ const HotelCard = ({ name, city, price, id, image }) => {
           <Text style={{ color: "grey", fontSize: 12 }}>Per Night </Text>
         </View>
       </View>
-
-      <TouchableOpacity style={styles.button}>
-        <LinearGradient colors={["#65C25E", "#606A6D"]} style={styles.gradient}>
-          <Text style={styles.text}>Book Now</Text>
-        </LinearGradient>
-      </TouchableOpacity>
-    </View>
+    </TouchableOpacity>
   );
 };
 const styles = StyleSheet.create({
   card: {
-    borderWidth: 1,
     borderRadius: 20,
     backgroundColor: "white",
     margin: 10,
-    height: 450,
+    height: 400,
     elevation: 3,
   },
   image: {

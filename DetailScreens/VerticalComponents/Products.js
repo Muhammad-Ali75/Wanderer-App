@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { View, Text, Image, FlatList, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import ProductCard from "./ProductCard";
-import wandererApi from "../../src/api/Wanderer";
+import wandererApi from "../../src/API/Wanderer";
+import SearchBar from "../../src/Components/SearchBar";
 
 const Products = ({ navigation }) => {
   const [productData, setProductData] = useState(null);
@@ -69,16 +70,7 @@ const Products = ({ navigation }) => {
             />
           </View>
         </View>
-        <LinearGradient
-          colors={["#292929", "transparent"]}
-          style={{
-            left: 0,
-            right: 0,
-            height: 90,
-            marginTop: -30,
-            marginBottom: 190,
-          }}
-        />
+        <SearchBar />
       </View>
       {productData && (
         <FlatList

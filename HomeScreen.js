@@ -1,8 +1,9 @@
 import React from "react";
 import { View, Text, Image } from "react-native";
-import { TextInput, ScrollView, TouchableOpacity } from "react-native";
+import { ScrollView, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import * as Animatable from "react-native-animatable";
+import SearchBar from "./src/Components/SearchBar";
 
 const HomeScreen = ({ navigation }) => {
   return (
@@ -57,45 +58,7 @@ const HomeScreen = ({ navigation }) => {
             </View>
           </View>
         </View>
-        <View>
-          <LinearGradient
-            colors={["teal", "transparent"]}
-            style={{
-              left: 0,
-              right: 0,
-              height: 90,
-              marginTop: -45,
-            }}
-          >
-            <View
-              style={{
-                backgroundColor: "#FFF",
-                paddingVertical: 8,
-                paddingHorizontal: 20,
-                marginHorizontal: 20,
-                borderRadius: 15,
-                marginTop: 25,
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
-              <TextInput
-                placeholder="Search"
-                placeholderTextColor="#b1e5d3"
-                style={{
-                  color: "teal",
-                  fontWeight: "bold",
-                  fontSize: 18,
-                  width: 260,
-                }}
-              />
-              <Image
-                source={require("./images/3.png")}
-                style={{ marginLeft: 30, height: 20, width: 20 }}
-              />
-            </View>
-          </LinearGradient>
-        </View>
+        <SearchBar />
         <Animatable.View
           animation="fadeInLeft"
           duration={1000}

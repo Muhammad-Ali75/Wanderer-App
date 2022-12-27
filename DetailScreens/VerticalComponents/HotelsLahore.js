@@ -3,7 +3,8 @@ import { View, Text, Image, StyleSheet, FlatList } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import * as Animatable from "react-native-animatable";
 import HotelCard from "./HotelCard";
-import wandererApi from "../../src/api/Wanderer";
+import wandererApi from "../../src/API/Wanderer";
+import SearchBar from "../../src/Components/SearchBar";
 
 const HotelsLahore = ({ navigation }) => {
   const [hotelsData, setHotelData] = useState(null);
@@ -49,6 +50,7 @@ const HotelsLahore = ({ navigation }) => {
           </View>
         </View>
       </View>
+      <SearchBar />
       {hotelsData && (
         <FlatList
           data={hotelsData}
