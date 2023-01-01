@@ -11,34 +11,34 @@ const ProductDetails = ({ route, navigation }) => {
   return (
     <LinearGradient colors={["white", "white"]} style={styles.container}>
       <View style={styles.header}>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}
+        >
+          <Image source={require("../../../images/backArrow.png")} />
+        </TouchableOpacity>
         <ScrollView
           // upper part pics
           horizontal
           showsHorizontalScrollIndicator={false}
           style={{ marginTop: 50 }}
         >
-          <TouchableOpacity onPress={() => navigation.navigate("Products")}>
-            <Image
-              source={require("../../images/backArrow.png")}
-              style={{ marginTop: 0, marginLeft: 25 }}
-            />
-          </TouchableOpacity>
           <Image
-            source={require("../../images/shoes1.png")}
+            source={require("../../../images/shoes1.png")}
             style={
               ([styles.logo], [{ marginLeft: 30, height: 300, width: 300 }])
             }
             resizeMode="stretch"
           />
           <Image
-            source={require("../../images/shoes2.png")}
+            source={require("../../../images/shoes2.png")}
             style={
               ([styles.logo], [{ marginLeft: 20, height: 300, width: 300 }])
             }
             resizeMode="stretch"
           />
           <Image
-            source={require("../../images/shoes3.png")}
+            source={require("../../../images/shoes3.png")}
             style={
               ([styles.logo], [{ marginLeft: 10, height: 300, width: 300 }])
             }
@@ -93,6 +93,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  backButton: {
+    position: "absolute",
+    alignSelf: "flex-start",
+    marginTop: "70%",
+    marginLeft: "5%",
+  },
   footer: {
     height: 400,
     backgroundColor: "#292929",
@@ -100,6 +106,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 30,
     paddingVertical: 50,
     paddingHorizontal: 30,
+    marginTop: -25,
   },
 
   logo: {

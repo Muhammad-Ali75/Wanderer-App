@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, Image, FlatList, TouchableOpacity } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 import ProductCard from "./ProductCard";
-import wandererApi from "../../src/API/Wanderer";
-import SearchBar from "../../src/Components/SearchBar";
+import wandererApi from "../../api/Wanderer";
+import SearchBar from "../../Components/SearchBar";
 
 const Products = ({ navigation }) => {
   const [productData, setProductData] = useState(null);
@@ -34,7 +33,7 @@ const Products = ({ navigation }) => {
         >
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Image
-              source={require("../../images/backArrow.png")}
+              source={require("../../../images/backArrow.png")}
               style={{ marginTop: 60, width: 20, tintColor: "white" }}
             />
           </TouchableOpacity>
@@ -59,7 +58,7 @@ const Products = ({ navigation }) => {
             </Text>
 
             <Image
-              source={require("../../images/w2.jpg")}
+              source={require("../../../images/w2.jpg")}
               style={{
                 height: 60,
                 width: 60,

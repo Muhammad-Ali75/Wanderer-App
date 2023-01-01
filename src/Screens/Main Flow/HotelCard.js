@@ -1,20 +1,29 @@
 import React from "react";
 import { Image, StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-const HotelCard = ({ name, city, price, id, image }) => {
+const HotelCard = ({ hotel }) => {
+  const navigation = useNavigation();
   return (
-    <TouchableOpacity style={styles.card} onPress={() => {}}>
-      <Image source={{ uri: image }} style={styles.image} />
+    <TouchableOpacity
+      style={styles.card}
+      onPress={() => {
+        navigation.navigate("HotelDetails", { hoteldetails: hotel });
+      }}
+    >
+      <Image source={{ uri: hotel.imageurls[0] }} style={styles.image} />
       <View style={styles.info}>
         <View>
           <Text style={styles.nameText} ellipsizeMode="tail" numberOfLines={2}>
-            {name}
+            {hotel.name}
           </Text>
-          <Text style={{ color: "grey", marginLeft: 3 }}>{city}</Text>
+          <Text style={{ color: "grey", marginLeft: 3 }}>{hotel.city}</Text>
         </View>
 
         <View>
-          <Text style={{ color: "#F4A40E", fontSize: 20 }}>Rs.{price}</Text>
+          <Text style={{ color: "#F4A40E", fontSize: 20 }}>
+            Rs.{hotel.rentperday}
+          </Text>
           <Text style={{ color: "grey", fontSize: 12 }}>Per Night </Text>
         </View>
       </View>

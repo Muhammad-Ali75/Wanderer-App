@@ -3,8 +3,8 @@ import { View, Text, Image, StyleSheet, FlatList } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import * as Animatable from "react-native-animatable";
 import HotelCard from "./HotelCard";
-import wandererApi from "../../src/API/Wanderer";
-import SearchBar from "../../src/Components/SearchBar";
+import wandererApi from "../../api/Wanderer";
+import SearchBar from "../../Components/SearchBar";
 
 const HotelsLahore = ({ navigation }) => {
   const [hotelsData, setHotelData] = useState(null);
@@ -30,7 +30,7 @@ const HotelsLahore = ({ navigation }) => {
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Image
               style={styles.backArrow}
-              source={require("../../images/backArrow.png")}
+              source={require("../../../images/backArrow.png")}
             />
           </TouchableOpacity>
           <View style={styles.container}>
@@ -43,7 +43,7 @@ const HotelsLahore = ({ navigation }) => {
             </Animatable.View>
             <View style={styles.logoContainer}>
               <Image
-                source={require("../../images/w2.jpg")}
+                source={require("../../../images/w2.jpg")}
                 style={styles.logo}
               />
             </View>
@@ -54,17 +54,9 @@ const HotelsLahore = ({ navigation }) => {
       {hotelsData && (
         <FlatList
           data={hotelsData}
-          keyExtractor={(item) => item.name}
+          keyExtractor={(item) => item._id}
           renderItem={({ item }) => {
-            return (
-              <HotelCard
-                name={item.name}
-                city={item.city}
-                id={item._id}
-                price={item.rentperday}
-                image={item.imageurls[0]}
-              />
-            );
+            return <HotelCard hotel={item} />;
           }}
         />
       )}
@@ -74,7 +66,7 @@ const HotelsLahore = ({ navigation }) => {
 const styles = StyleSheet.create({
   header: {
     backgroundColor: "#F6F5EF",
-    height: "30%",
+    height: "25%",
   },
   header2: {
     backgroundColor: "#6B3940",
@@ -90,7 +82,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
   },
   backArrow: {
-    marginTop: 30,
+    marginTop: 50,
     marginLeft: 5,
     tintColor: "white",
     width: "5%",
@@ -99,7 +91,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 60,
+    marginTop: 30,
     width: "100%",
   },
   text: {

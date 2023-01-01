@@ -7,15 +7,16 @@ const ProductCard = ({ product }) => {
   return (
     <TouchableOpacity
       onPress={() =>
-        navigation.navigate("ProductDetails", { productdetails: product })
+        navigation.navigate("ProdutDetails", { productdetails: product })
       }
       style={styles.card}
     >
       <Image
         style={styles.image}
-        source={require("../../images/no-image.png")}
+        source={{ uri: product.imageurls[0] }}
         resizeMode="cover"
       />
+
       <View style={styles.container}>
         <Text style={styles.name}>{product.name}</Text>
         <Text style={styles.price}>Rs. {product.price}</Text>
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
   },
   image: {
     height: 180,
-    width: "90%",
+    width: "100%",
     alignSelf: "center",
   },
   container: {

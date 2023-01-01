@@ -5,7 +5,7 @@ import { Avatar, Title, Drawer, Caption, Paragraph } from "react-native-paper";
 import Icon from "@expo/vector-icons/MaterialIcons";
 import { LinearGradient } from "expo-linear-gradient";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
-import { Context as AuthContext } from "./src/Context/AuthContext";
+import { Context as AuthContext } from "../../Context/AuthContext";
 
 export function DrawerContent(props) {
   const { state, signout } = useContext(AuthContext);

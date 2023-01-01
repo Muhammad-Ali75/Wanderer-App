@@ -1,14 +1,5 @@
 import React from "react";
-import {
-  View,
-  Text,
-  Image,
-  ImageBackground,
-  Button,
-  TextComponent,
-  StyleSheet,
-  StatusBar,
-} from "react-native";
+import { View, Text, Image, StyleSheet } from "react-native";
 import {
   TextInput,
   ScrollView,
@@ -17,8 +8,6 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 
 import * as Animatable from "react-native-animatable";
-import IslHotels from "../hotelsSwipe/IslHotelPics";
-import Swiper from "react-native-swiper";
 
 const Hotels = ({ navigation }) => {
   return (
@@ -161,9 +150,7 @@ const Hotels = ({ navigation }) => {
             duration={1000}
             style={{ height: "80%", marginRight: 10 }}
           >
-            <View>
-              <IslHotels />
-            </View>
+            <View />
           </Animatable.View>
         </View>
       </View>
