@@ -14,9 +14,6 @@ import HomeScreen from "../../../HomeScreen";
 
 import HotelsLahore from "./Hotels";
 
-import Products from "./Products";
-import ProductDetails from "./ProductDetails";
-
 const Drawer = createDrawerNavigator();
 
 export const DrawerScreenStack = () => {

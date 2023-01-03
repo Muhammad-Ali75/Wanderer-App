@@ -6,14 +6,20 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import homeScreen from "../../../HomeScreen";
 
 import { FontAwesome5 } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import Hotels from "./Hotels";
 import HotelDetails from "./HotelsDetails";
 import Products from "./Products";
 import ProductDetails from "./ProductDetails";
+import Tours from "./Tours";
+import TourDetails from "./TourDetails";
+
+import Notification from "../../../Notifications";
 
 const HomeStack = createStackNavigator();
 const ProductStack = createStackNavigator();
 const HotelStack = createStackNavigator();
+const TourStack = createStackNavigator();
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -27,6 +33,18 @@ const MainTabScreen = () => (
         tabBarColor: "teal",
         tabBarIcon: ({ color }) => (
           <Icon name="ios-home" color={color} size={26} />
+        ),
+      }}
+    />
+    <Tab.Screen
+      name="Tour"
+      component={TourStackScreen}
+      options={{
+        tabBarLabel: "Tour",
+        tabBarColor: "#292929",
+
+        tabBarIcon: ({ color }) => (
+          <MaterialIcons name="tour" size={24} color={color} />
         ),
       }}
     />
@@ -51,6 +69,19 @@ const MainTabScreen = () => (
 
         tabBarIcon: ({ color }) => (
           <FontAwesome5 name="shopping-bag" size={24} color={color} />
+        ),
+      }}
+    />
+
+    <Tab.Screen
+      name="Notif"
+      component={Notification}
+      options={{
+        tabBarLabel: "Noti",
+        tabBarColor: "#292929",
+
+        tabBarIcon: ({ color }) => (
+          <MaterialIcons name="notifications" size={24} color={color} />
         ),
       }}
     />
@@ -100,4 +131,11 @@ const HotelStackScreen = () => (
     <HotelStack.Screen name="Hotel" component={Hotels} />
     <HotelStack.Screen name="HotelDetails" component={HotelDetails} />
   </HotelStack.Navigator>
+);
+
+const TourStackScreen = () => (
+  <TourStack.Navigator screenOptions={{ headerShown: false }}>
+    <TourStack.Screen name="Tour" component={Tours} />
+    <TourStack.Screen name="TourDetails" component={TourDetails} />
+  </TourStack.Navigator>
 );

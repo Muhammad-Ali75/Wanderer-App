@@ -1,5 +1,4 @@
 import React from "react";
-
 import {
   View,
   Text,
@@ -10,15 +9,16 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import * as Animatable from "react-native-animatable";
+import { AntDesign } from "@expo/vector-icons";
 
-const ProductDetails = ({ route, navigation }) => {
-  const { productdetails } = route.params;
+const TourDetails = ({ route, navigation }) => {
+  const { tourdetails } = route.params;
 
   return (
     <LinearGradient colors={["white", "white"]} style={styles.container}>
       <View style={styles.header}>
         <FlatList
-          data={productdetails.imageurls}
+          data={tourdetails.imageurls}
           horizontal={true}
           keyExtractor={(item) => item}
           renderItem={({ item }) => {
@@ -36,28 +36,17 @@ const ProductDetails = ({ route, navigation }) => {
           style={styles.backButton}
           onPress={() => navigation.goBack()}
         >
-          <Image source={require("../../../images/backArrow.png")} />
+          <AntDesign name="arrowleft" size={30} color="white" />
         </TouchableOpacity>
-        <Text style={styles.title}>{productdetails.name}</Text>
-        <Text
-          style={{
-            color: "gold",
-            marginLeft: 300,
-            fontSize: 20,
-            marginTop: -28,
-          }}
-        >
-          Rs. {productdetails.price}
+        <Text style={styles.title} ellipsizeMode="tail" numberOfLines={4}>
+          {tourdetails.name}
         </Text>
+        <Text style={styles.price}>Rs. {tourdetails.rentperday}/day</Text>
         <Text style={styles.text}> Reviews:</Text>
 
-        <Text style={{ color: "gold", marginLeft: 60, marginTop: -19 }}>
-          {"  "}4.8
-        </Text>
-        <Text style={{ marginTop: 10, marginLeft: 3, color: "white" }}>
-          Description:
-        </Text>
-        <Text style={styles.text}>{productdetails.discription}</Text>
+        <Text style={styles.reviewValue}>{"  "}4.8</Text>
+        <Text style={styles.description}>Description:</Text>
+        <Text style={styles.text}>{tourdetails.description}</Text>
 
         <View style={styles.button}>
           <TouchableOpacity>
@@ -65,7 +54,7 @@ const ProductDetails = ({ route, navigation }) => {
               colors={["#606A6D", "#14FC9B"]}
               style={styles.SignIn}
             >
-              <Text style={styles.textSign}>Buy Now</Text>
+              <Text style={styles.textSign}>Book Now</Text>
             </LinearGradient>
           </TouchableOpacity>
         </View>
@@ -74,7 +63,8 @@ const ProductDetails = ({ route, navigation }) => {
   );
 };
 
-export default ProductDetails;
+export default TourDetails;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -109,6 +99,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 23,
     fontWeight: "bold",
+    maxWidth: "55%",
   },
 
   text: {
@@ -133,5 +124,21 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginTop: 15,
     fontWeight: "bold",
+  },
+  price: {
+    color: "gold",
+    marginLeft: 300,
+    fontSize: 20,
+    marginTop: -28,
+  },
+  reviewValue: {
+    color: "gold",
+    marginLeft: 60,
+    marginTop: -19,
+  },
+  description: {
+    marginTop: 10,
+    marginLeft: 3,
+    color: "white",
   },
 });

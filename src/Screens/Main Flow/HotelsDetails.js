@@ -16,12 +16,6 @@ const HotelDetails = ({ route, navigation }) => {
 
   return (
     <LinearGradient colors={["white", "white"]} style={styles.container}>
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => navigation.goBack()}
-      >
-        <Image source={require("../../../images/backArrow.png")} />
-      </TouchableOpacity>
       <View style={styles.header}>
         <FlatList
           data={hoteldetails.imageurls}
@@ -38,6 +32,12 @@ const HotelDetails = ({ route, navigation }) => {
         />
       </View>
       <Animatable.View animation="fadeInUpBig" style={styles.footer}>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}
+        >
+          <Image source={require("../../../images/backArrow.png")} />
+        </TouchableOpacity>
         <Text style={styles.title} ellipsizeMode="tail" numberOfLines={4}>
           {hoteldetails.name}
         </Text>
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
   backButton: {
     position: "absolute",
     alignSelf: "flex-start",
-    top: "7%",
+    top: "-150%",
     left: "5%",
   },
   footer: {

@@ -59,7 +59,7 @@ export function DrawerContent(props) {
               )}
               label="Products"
               onPress={() => {
-                props.navigation.navigate("Products");
+                props.navigation.navigate("HomeJS");
               }}
             />
             <DrawerItem
@@ -68,7 +68,7 @@ export function DrawerContent(props) {
               )}
               label="Guide!"
               onPress={() => {
-                props.navigation.navigate("Profile");
+                props.navigation.navigate("noti");
               }}
             />
 
