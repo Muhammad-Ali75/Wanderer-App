@@ -6,8 +6,10 @@ import HotelCard from "./HotelCard";
 import wandererApi from "../../api/Wanderer";
 import SearchBar from "../../Components/SearchBar";
 
-const HotelsLahore = ({ navigation }) => {
-  const [hotelsData, setHotelData] = useState(null);
+const Hotels = ({ navigation }) => {
+  const [hotelsData, setHotelData] = useState([]);
+  const [hotelOriginal, setHotelOriginal] = useState([]);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     apicall();
@@ -17,12 +19,32 @@ const HotelsLahore = ({ navigation }) => {
     try {
       const response = await wandererApi.get("/api/rooms/getallrooms");
       setHotelData(response.data);
-      console.log("HOTELSDATA::::", hotelsData);
+      setHotelOriginal(response.data);
     } catch (err) {
       console.log(err);
     }
   };
 
+  const datafilter = (text) => {
+    // Check if searched text is not blank
+    if (text) {
+      // Inserted text is not blank
+      // Filter the masterDataSource and update FilteredDataSource
+      const newData = hotelOriginal.filter(function(item) {
+        // Applying filter for the inserted text in search bar
+        const itemData = item.name ? item.name.toUpperCase() : "".toUpperCase();
+        const textData = text.toUpperCase();
+        return itemData.indexOf(textData) > -1;
+      });
+      setHotelData(newData);
+      setSearch(text);
+    } else {
+      // Inserted text is blank
+      // Update FilteredDataSource with masterDataSource
+      setHotelData(hotelOriginal);
+      setSearch(text);
+    }
+  };
   return (
     <>
       <View style={styles.header}>
@@ -39,7 +61,7 @@ const HotelsLahore = ({ navigation }) => {
               duration={3000}
               style={{ width: "50%" }}
             >
-              <Text style={styles.text}>Where would you want to go ? </Text>
+              <Text style={styles.text}>Where would you want to stay ? </Text>
             </Animatable.View>
             <View style={styles.logoContainer}>
               <Image
@@ -50,7 +72,7 @@ const HotelsLahore = ({ navigation }) => {
           </View>
         </View>
       </View>
-      <SearchBar />
+      <SearchBar value={search} onChange={(text) => datafilter(text)} />
       {hotelsData && (
         <FlatList
           data={hotelsData}
@@ -63,6 +85,7 @@ const HotelsLahore = ({ navigation }) => {
     </>
   );
 };
+export default Hotels;
 const styles = StyleSheet.create({
   header: {
     backgroundColor: "#F6F5EF",
@@ -111,4 +134,3 @@ const styles = StyleSheet.create({
     borderRadius: 30,
   },
 });
-export default HotelsLahore;

@@ -7,7 +7,9 @@ import wandererApi from "../../api/Wanderer";
 import SearchBar from "../../Components/SearchBar";
 
 const Tour = ({ navigation }) => {
-  const [tour, setTourData] = useState(null);
+  const [tour, setTourData] = useState([]);
+  const [tourOriginal, setTourOriginal] = useState([]);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     apicall();
@@ -17,9 +19,30 @@ const Tour = ({ navigation }) => {
     try {
       const response = await wandererApi.get("/api/tours/getalltours");
       setTourData(response.data);
-      console.log("Tour::", tour);
+      setTourOriginal(response.data);
     } catch (err) {
       console.log(err);
+    }
+  };
+
+  const datafilter = (text) => {
+    // Check if searched text is not blank
+    if (text) {
+      // Inserted text is not blank
+      // Filter the masterDataSource and update FilteredDataSource
+      const newData = tourOriginal.filter(function(item) {
+        // Applying filter for the inserted text in search bar
+        const itemData = item.name ? item.name.toUpperCase() : "".toUpperCase();
+        const textData = text.toUpperCase();
+        return itemData.indexOf(textData) > -1;
+      });
+      setTourData(newData);
+      setSearch(text);
+    } else {
+      // Inserted text is blank
+      // Update FilteredDataSource with masterDataSource
+      setTourData(tourOriginal);
+      setSearch(text);
     }
   };
 
@@ -50,7 +73,7 @@ const Tour = ({ navigation }) => {
           </View>
         </View>
       </View>
-      <SearchBar />
+      <SearchBar value={search} onChange={(text) => datafilter(text)} />
       {tour && (
         <FlatList
           data={tour}

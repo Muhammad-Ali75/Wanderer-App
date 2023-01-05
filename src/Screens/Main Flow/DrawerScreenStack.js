@@ -12,14 +12,12 @@ import DetailsScreenMur from "../../../DetailScreens/DetailsScreenMur";
 
 import HomeScreen from "../../../HomeScreen";
 
-import HotelsLahore from "./Hotels";
-
 const Drawer = createDrawerNavigator();
 
 export const DrawerScreenStack = () => {
   return (
     <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
-      <Drawer.Screen name="HomeDrawer" component={MainTabScreen} />
+      <Drawer.Screen name="Home" component={MainTabScreen} />
 
       <Drawer.Screen
         name="DetailsScreenLahore"
@@ -31,8 +29,6 @@ export const DrawerScreenStack = () => {
       <Drawer.Screen name="DetailsScreenMul" component={DetailsScreenMul} />
 
       <Drawer.Screen name="HomeScreen" component={HomeScreen} />
-
-      <Drawer.Screen name="HotelsLahore" component={HotelsLahore} />
     </Drawer.Navigator>
   );
 };

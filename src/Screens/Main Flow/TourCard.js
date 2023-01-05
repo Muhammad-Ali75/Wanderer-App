@@ -13,14 +13,14 @@ const TourCard = ({ tour }) => {
     >
       <Image source={{ uri: tour.imageurls[0] }} style={styles.image} />
       <View style={styles.info}>
-        <View>
+        <View style={{ flex: 3 }}>
           <Text style={styles.nameText} ellipsizeMode="tail" numberOfLines={2}>
             {tour.name}
           </Text>
           <Text style={{ color: "grey", marginLeft: 3 }}>{tour.city}</Text>
         </View>
 
-        <View>
+        <View style={styles.right}>
           <Text style={{ color: "#F4A40E", fontSize: 20 }}>
             Rs.{tour.rentperday}
           </Text>
@@ -74,5 +74,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginTop: 13,
     fontWeight: "bold",
+  },
+  right: {
+    flex: 1,
+    alignItems: "flex-end",
+    paddingRight: 10,
   },
 });

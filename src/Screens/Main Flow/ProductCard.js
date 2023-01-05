@@ -11,36 +11,26 @@ const ProductCard = ({ product }) => {
       }
       style={styles.card}
     >
-      <Image
-        style={styles.image}
-        source={{ uri: product.imageurls[0] }}
-        resizeMode="cover"
-      />
+      <Image style={styles.image} source={{ uri: product.imageurls[0] }} />
 
-      <View style={styles.container}>
-        <Text style={styles.name}>{product.name}</Text>
-        <Text style={styles.price}>Rs. {product.price}</Text>
+      <View style={styles.info}>
+        <View style={{ flex: 3 }}>
+          <Text style={styles.nameText} ellipsizeMode="tail" numberOfLines={2}>
+            {product.name}
+          </Text>
+        </View>
+
+        <View style={styles.right}>
+          <Text style={{ color: "#F4A40E", fontSize: 20 }}>
+            Rs.{product.price}
+          </Text>
+        </View>
       </View>
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
-  card: {
-    height: 250,
-    width: "90%",
-    elevation: 2,
-    backgroundColor: "#FFF",
-    marginLeft: 20,
-    marginTop: 20,
-    borderRadius: 15,
-    marginBottom: 10,
-  },
-  image: {
-    height: 180,
-    width: "100%",
-    alignSelf: "center",
-  },
   container: {
     flexDirection: "row",
     paddingTop: 10,
@@ -54,6 +44,52 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#00a46c",
     paddingRight: 20,
+  },
+  card: {
+    borderRadius: 20,
+    backgroundColor: "white",
+    margin: 10,
+    height: 400,
+    elevation: 3,
+  },
+  image: {
+    margin: 30,
+    borderRadius: 10,
+    height: 250,
+    width: "88%",
+  },
+  info: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    margin: 30,
+    marginTop: -20,
+  },
+  nameText: {
+    fontSize: 25,
+    color: "black",
+    maxWidth: "80%",
+  },
+  button: {
+    alignItems: "center",
+    marginTop: -20,
+  },
+  gradient: {
+    width: 200,
+    height: 45,
+    justifyContent: "center",
+    borderRadius: 10,
+    flexDirection: "row",
+  },
+  text: {
+    color: "white",
+    fontSize: 16,
+    marginTop: 13,
+    fontWeight: "bold",
+  },
+  right: {
+    flex: 1,
+    alignItems: "flex-end",
+    paddingRight: 10,
   },
 });
 

@@ -13,14 +13,14 @@ const HotelCard = ({ hotel }) => {
     >
       <Image source={{ uri: hotel.imageurls[0] }} style={styles.image} />
       <View style={styles.info}>
-        <View>
+        <View style={{ flex: 3 }}>
           <Text style={styles.nameText} ellipsizeMode="tail" numberOfLines={2}>
             {hotel.name}
           </Text>
           <Text style={{ color: "grey", marginLeft: 3 }}>{hotel.city}</Text>
         </View>
 
-        <View>
+        <View style={styles.right}>
           <Text style={{ color: "#F4A40E", fontSize: 20 }}>
             Rs.{hotel.rentperday}
           </Text>
@@ -30,6 +30,9 @@ const HotelCard = ({ hotel }) => {
     </TouchableOpacity>
   );
 };
+
+export default HotelCard;
+
 const styles = StyleSheet.create({
   card: {
     borderRadius: 20,
@@ -72,5 +75,9 @@ const styles = StyleSheet.create({
     marginTop: 13,
     fontWeight: "bold",
   },
+  right: {
+    flex: 1,
+    alignItems: "flex-end",
+    paddingRight: 10,
+  },
 });
-export default HotelCard;

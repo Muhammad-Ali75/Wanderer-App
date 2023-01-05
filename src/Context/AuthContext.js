@@ -24,7 +24,6 @@ const tryLocalSignin = (dispatch) => async () => {
 };
 const signup = (dispatch) => {
   return async ({ name, email, password, cpassword }) => {
-    console.log("Auth", name, email, password, cpassword);
     try {
       const response = await wandererApi.post("/api/users/register", {
         name,
@@ -32,7 +31,6 @@ const signup = (dispatch) => {
         password,
         cpassword,
       });
-      console.log(response.data);
     } catch (error) {
       console.log(error);
       dispatch({
@@ -50,7 +48,6 @@ const signin = (dispatch) => {
         email,
         password,
       });
-      console.log(JSON.stringify(response.data));
       await SecureStore.setItemAsync(
         "Current_User",
         JSON.stringify(response.data)

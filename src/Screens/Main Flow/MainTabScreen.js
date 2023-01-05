@@ -24,9 +24,9 @@ const TourStack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
 const MainTabScreen = () => (
-  <Tab.Navigator initialRouteName="Home" activeColor="white" shifting={true}>
+  <Tab.Navigator initialRouteName="HomeScreen" tabBarColor="black">
     <Tab.Screen
-      name="Home"
+      name="HomeScreen"
       component={HomeStackScreen}
       options={{
         tabBarLabel: "Home",
