@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import {
   View,
   Text,
@@ -10,9 +10,50 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import * as Animatable from "react-native-animatable";
 import { AntDesign } from "@expo/vector-icons";
+import DatePicker from "../../Components/DatePicker";
+import wandererAPI from "../../api/Wanderer";
+import { Context as AuthContext } from "../../Context/AuthContext";
+import StripeCheckout from "react-native-simple-stripe";
+import { Overlay } from "@rneui/themed";
 
 const TourDetails = ({ route, navigation }) => {
   const { tourdetails } = route.params;
+  const publicKey =
+    "pk_test_51M2qZEJdqzfSzjlZrwNofnmcIZtUP3D9f8JRh3mCzj4f2kmBcXaHarx6pCr7D4dLBVWaHidXsY7MctqwxUwD0BQe00dGUcMYUU";
+  const { state } = useContext(AuthContext);
+  const user = JSON.parse(state.token);
+  const [startDate, onChangeStartDate] = useState(new Date());
+  const [endDate, onChangeEndDate] = useState(new Date());
+  const [totalDays, setTotalDays] = useState(0);
+  const [totalAmount, setTotalAmount] = useState();
+  const [visible, setVisible] = useState(false);
+
+  const toggleOverlay = () => {
+    setVisible(!visible);
+  };
+  const calTotals = () => {
+    const oneDay = 1000 * 60 * 60 * 24;
+    const diffInTime = endDate.getTime() - startDate.getTime();
+    const diffInDays = Math.round(diffInTime / oneDay);
+    setTotalDays(diffInDays);
+    setTotalAmount(diffInDays * tourdetails.rentperday);
+  };
+
+  const onToken = async (token) => {
+    try {
+      const response = await wandererAPI.post("/api/tourbookings/booktour", {
+        tour: tourdetails,
+        userid: user._id,
+        fromdate: startDate,
+        todate: endDate,
+        totalAmount: totalAmount,
+        totaldays: totalDays,
+        token: token,
+      });
+    } catch (error) {
+      console.log("BOOKERROR", error);
+    }
+  };
 
   return (
     <LinearGradient colors={["white", "white"]} style={styles.container}>
@@ -20,7 +61,7 @@ const TourDetails = ({ route, navigation }) => {
         <FlatList
           data={tourdetails.imageurls}
           horizontal={true}
-          keyExtractor={(item) => item}
+          keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => {
             return (
               <Image
@@ -48,8 +89,34 @@ const TourDetails = ({ route, navigation }) => {
         <Text style={styles.description}>Description:</Text>
         <Text style={styles.text}>{tourdetails.description}</Text>
 
+        <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
+          <DatePicker
+            title={"Select Start Date"}
+            onChangeDate={onChangeStartDate}
+            value={new Date()}
+            minimumDate={new Date()}
+          />
+          <DatePicker
+            title={"Select End Date"}
+            onChangeDate={onChangeEndDate}
+            value={startDate}
+            minimumDate={startDate}
+          />
+        </View>
+        <Overlay
+          isVisible={visible}
+          onBackdropPress={toggleOverlay}
+          overlayStyle={{ backgroundColor: "transparent", elevation: -2 }}
+        >
+          <StripeCheckout token={onToken} stripeKey={publicKey} />
+        </Overlay>
         <View style={styles.button}>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              calTotals();
+              toggleOverlay();
+            }}
+          >
             <LinearGradient
               colors={["#606A6D", "#14FC9B"]}
               style={styles.SignIn}
@@ -109,7 +176,7 @@ const styles = StyleSheet.create({
 
   button: {
     alignItems: "flex-end",
-    marginTop: 70,
+    marginTop: 10,
   },
 
   SignIn: {

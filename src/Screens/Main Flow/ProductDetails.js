@@ -20,7 +20,7 @@ const ProductDetails = ({ route, navigation }) => {
         <FlatList
           data={productdetails.imageurls}
           horizontal={true}
-          keyExtractor={(item) => item}
+          keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => {
             return (
               <Image

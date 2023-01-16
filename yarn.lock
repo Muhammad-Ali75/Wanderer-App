@@ -1921,6 +1921,13 @@
     prompts "^2.4.0"
     semver "^6.3.0"
 
+"@react-native-community/datetimepicker@6.2.0":
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/@react-native-community/datetimepicker/-/datetimepicker-6.2.0.tgz#50bc629e70e4030c48205c01efbc65a8f35d82d4"
+  integrity sha512-w1ZS+wYO3qSASliRp+B7mPphOhtVm++rhSbj1WsgXdgLgDXSkDxpMnAXXQu9M0XdcgBwVJ6wDExeIwuzU5Jtfg==
+  dependencies:
+    invariant "^2.2.4"
+
 "@react-native-community/eslint-config@^0.0.5":
   version "0.0.5"
   resolved "https://registry.npmjs.org/@react-native-community/eslint-config/-/eslint-config-0.0.5.tgz"
@@ -4669,6 +4676,11 @@ form-data@~2.3.2:
     asynckit "^0.4.0"
     combined-stream "^1.0.6"
     mime-types "^2.1.12"
+
+form-urlencoded@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/form-urlencoded/-/form-urlencoded-6.1.0.tgz#01366c175b4b48cf4df53b180d9932df912578c6"
+  integrity sha512-lc1Qd9nnEewXKoiPjIA1n38M5STbyY6krgoegsg7SsAt2b98HZKe25KaJvKFBwQaOcmh8FP7JbXVC7gocZw+XQ==
 
 fragment-cache@^0.2.1:
   version "0.2.1"
@@ -7982,6 +7994,11 @@ react-native-screens@~3.15.0:
   dependencies:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
+
+react-native-simple-stripe@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-simple-stripe/-/react-native-simple-stripe-1.0.0.tgz#8548e295ede1cd3355cf96d850ae5bbd9d71904e"
+  integrity sha512-UhACWM1RQz7IDErDajP/jQn/IVfeTCKui1+2bFyP4yqLhIJzW7UUTno7F1xasHNFW2j5gMgdSC/1c0028p4JmQ==
 
 react-native-size-matters@^0.4.0:
   version "0.4.0"
