@@ -50,6 +50,12 @@ const TourDetails = ({ route, navigation }) => {
         totaldays: totalDays,
         token: token,
       });
+      {
+        response.data
+          ? (alert("Payment Successful, Your Tour is booked."),
+            navigation.goBack())
+          : alert("Something went wrong. Try Again!");
+      }
     } catch (error) {
       console.log("BOOKERROR", error);
     }
