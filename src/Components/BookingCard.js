@@ -1,20 +1,27 @@
 import React from "react";
 import { View, TouchableOpacity, StyleSheet, Text } from "react-native";
 
-const BookingCard = ({ title, city, id }) => {
+const BookingCard = ({ bookingData, onCancelPress: onCancelPress }) => {
   return (
     <View style={styles.container}>
       <View style={{ marginLeft: 10, flexDirection: "row" }}>
         <View>
-          <Text style={{ color: "teal", fontSize: 15 }}>{title}</Text>
-          <Text style={{ color: "grey" }}> ajhds</Text>
+          <Text style={{ color: "teal", fontSize: 15 }}>
+            {bookingData.tour}
+          </Text>
+          <Text style={{ color: "grey" }}> {bookingData.status}</Text>
         </View>
         <View>
-          <Text style={{ color: "grey", marginLeft: 7 }}>{city}</Text>
+          <Text style={{ color: "grey", marginLeft: 7 }}>
+            {bookingData.totaldays}
+          </Text>
         </View>
       </View>
-      <TouchableOpacity style={styles.button} onPress={() => console.log(id)}>
-        <Text style={styles.buttonText}>Cancle</Text>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => onCancelPress(bookingData._id, bookingData.tourid)}
+      >
+        <Text style={styles.buttonText}>Cancel</Text>
       </TouchableOpacity>
     </View>
   );

@@ -6,9 +6,12 @@ import Icon from "@expo/vector-icons/MaterialIcons";
 import { LinearGradient } from "expo-linear-gradient";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import { Context as AuthContext } from "../../Context/AuthContext";
+import { FontAwesome5 } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 
 export function DrawerContent(props) {
   const { state, signout } = useContext(AuthContext);
+  const user = JSON.parse(state.token);
   return (
     <LinearGradient colors={["#FBF8F8", "teal"]} style={styles.LinearGradient}>
       <DrawerContentScrollView {...props}>
@@ -22,8 +25,8 @@ export function DrawerContent(props) {
                 }}
               />
               <View style={{ flexDirection: "column", marginLeft: 15 }}>
-                <Title style={styles.title}>Ashar Chauhan</Title>
-                <Caption style={styles.caption}>@ashar_chauhan</Caption>
+                <Title style={styles.title}>{user.name}</Title>
+                <Caption style={styles.caption}>{user.email}</Caption>
               </View>
             </View>
 
@@ -54,31 +57,30 @@ export function DrawerContent(props) {
               }}
             />
             <DrawerItem
-              icon={({ color, size }) => (
-                <Icon name="bookmark" color={color} size={size} />
+              icon={({ color }) => (
+                <MaterialIcons name="tour" size={24} color={color} />
               )}
-              label="Products"
+              label="My Tour Bookings"
               onPress={() => {
-                props.navigation.navigate("HomeJS");
+                props.navigation.navigate("MyTours");
+              }}
+            />
+            <DrawerItem
+              icon={({ color }) => (
+                <FontAwesome5 name="hotel" size={17} color={color} />
+              )}
+              label="My Hotel Bookings"
+              onPress={() => {
+                props.navigation.navigate("MyHotels");
               }}
             />
             <DrawerItem
               icon={({ color, size }) => (
-                <Icon name="person" color={color} size={size} />
+                <FontAwesome5 name="shopping-bag" size={19} color={color} />
               )}
-              label="Guide!"
+              label="My Product Bookings"
               onPress={() => {
-                props.navigation.navigate("noti");
-              }}
-            />
-
-            <DrawerItem
-              icon={({ color, size }) => (
-                <Icon name="explore" color={color} size={size} />
-              )}
-              label="Explore Hotels"
-              onPress={() => {
-                props.navigation.navigate("ExploreScreen");
+                props.navigation.navigate("MyProducts");
               }}
             />
           </Drawer.Section>
@@ -92,7 +94,6 @@ export function DrawerContent(props) {
           label="Sign Out"
           onPress={async () => {
             await signout();
-            console.log(state);
           }}
         />
       </Drawer.Section>
@@ -142,7 +143,7 @@ const styles = StyleSheet.create({
   },
   bottomDrawerSection: {
     marginBottom: 15,
-    borderTopColor: "blue",
+    borderTopColor: "rgba(41,41,41, 0.3)",
     borderTopWidth: 1,
   },
   preference: {

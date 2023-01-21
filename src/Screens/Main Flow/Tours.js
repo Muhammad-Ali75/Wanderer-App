@@ -53,6 +53,7 @@ const Tour = ({ navigation }) => {
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Image
               style={styles.backArrow}
+              //TODO remove this back arrow from tour, hotel, product.
               source={require("../../../images/backArrow.png")}
             />
           </TouchableOpacity>

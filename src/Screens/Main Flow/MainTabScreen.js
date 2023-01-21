@@ -14,8 +14,6 @@ import ProductDetails from "./ProductDetails";
 import Tours from "./Tours";
 import TourDetails from "./TourDetails";
 
-import Notification from "../../../Notifications";
-
 const HomeStack = createStackNavigator();
 const ProductStack = createStackNavigator();
 const HotelStack = createStackNavigator();
@@ -37,7 +35,7 @@ const MainTabScreen = () => (
       }}
     />
     <Tab.Screen
-      name="Tour"
+      name="TourScreens"
       component={TourStackScreen}
       options={{
         tabBarLabel: "Tour",
@@ -49,7 +47,7 @@ const MainTabScreen = () => (
       }}
     />
     <Tab.Screen
-      name="HotelsList"
+      name="HotelsScreens"
       component={HotelStackScreen}
       options={{
         tabBarLabel: "Hotels",
@@ -61,7 +59,7 @@ const MainTabScreen = () => (
       }}
     />
     <Tab.Screen
-      name="ProductsList"
+      name="ProductsScreens"
       component={ProductStackScreen}
       options={{
         tabBarLabel: "Products",
@@ -69,19 +67,6 @@ const MainTabScreen = () => (
 
         tabBarIcon: ({ color }) => (
           <FontAwesome5 name="shopping-bag" size={24} color={color} />
-        ),
-      }}
-    />
-
-    <Tab.Screen
-      name="Notif"
-      component={Notification}
-      options={{
-        tabBarLabel: "Noti",
-        tabBarColor: "#292929",
-
-        tabBarIcon: ({ color }) => (
-          <MaterialIcons name="notifications" size={24} color={color} />
         ),
       }}
     />
