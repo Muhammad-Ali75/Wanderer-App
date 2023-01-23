@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, Image, StyleSheet, FlatList } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import * as Animatable from "react-native-animatable";
-import TourCard from "./TourCard";
-import wandererApi from "../../api/Wanderer";
-import SearchBar from "../../Components/SearchBar";
+import React, { useState, useEffect } from 'react';
+import { View, Text, Image, StyleSheet, FlatList } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import * as Animatable from 'react-native-animatable';
+import TourCard from './TourCard';
+import wandererApi from '../../../api/Wanderer';
+import SearchBar from '../../../Components/SearchBar';
+import { AntDesign } from '@expo/vector-icons';
 
 const Tour = ({ navigation }) => {
   const [tour, setTourData] = useState([]);
   const [tourOriginal, setTourOriginal] = useState([]);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     apicall();
@@ -17,7 +18,7 @@ const Tour = ({ navigation }) => {
 
   const apicall = async () => {
     try {
-      const response = await wandererApi.get("/api/tours/getalltours");
+      const response = await wandererApi.get('/api/tours/getalltours');
       setTourData(response.data);
       setTourOriginal(response.data);
     } catch (err) {
@@ -32,7 +33,7 @@ const Tour = ({ navigation }) => {
       // Filter the masterDataSource and update FilteredDataSource
       const newData = tourOriginal.filter(function(item) {
         // Applying filter for the inserted text in search bar
-        const itemData = item.name ? item.name.toUpperCase() : "".toUpperCase();
+        const itemData = item.name ? item.name.toUpperCase() : ''.toUpperCase();
         const textData = text.toUpperCase();
         return itemData.indexOf(textData) > -1;
       });
@@ -50,24 +51,23 @@ const Tour = ({ navigation }) => {
     <>
       <View style={styles.header}>
         <View style={styles.header2}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Image
-              style={styles.backArrow}
-              //TODO remove this back arrow from tour, hotel, product.
-              source={require("../../../images/backArrow.png")}
-            />
+          <TouchableOpacity
+            style={{ marginTop: 35 }}
+            onPress={() => navigation.goBack()}
+          >
+            <AntDesign name="arrowleft" size={30} color="white" />
           </TouchableOpacity>
           <View style={styles.container}>
             <Animatable.View
               animation="fadeIn"
               duration={3000}
-              style={{ width: "50%" }}
+              style={{ width: '50%' }}
             >
               <Text style={styles.text}>Where would you want to go ? </Text>
             </Animatable.View>
             <View style={styles.logoContainer}>
               <Image
-                source={require("../../../images/w2.jpg")}
+                source={require('../../../../images/w2.jpg')}
                 style={styles.logo}
               />
             </View>
@@ -89,44 +89,44 @@ const Tour = ({ navigation }) => {
 };
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: "#F6F5EF",
-    height: "25%",
+    backgroundColor: '#F6F5EF',
+    height: '25%',
   },
   header2: {
-    backgroundColor: "#292929",
-    height: "100%",
+    backgroundColor: '#292929',
+    height: '100%',
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
     paddingHorizontal: 20,
   },
   slide: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#FFF",
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#FFF',
   },
   backArrow: {
     marginTop: 50,
     marginLeft: 5,
-    tintColor: "white",
-    width: "5%",
+    tintColor: 'white',
+    width: '5%',
     height: 13,
   },
   container: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     marginTop: 30,
-    width: "100%",
+    width: '100%',
   },
   text: {
     fontSize: 28,
-    color: "#FFF",
-    fontWeight: "bold",
+    color: '#FFF',
+    fontWeight: 'bold',
     marginTop: 10,
   },
   logoContainer: {
-    width: "50%",
-    alignItems: "flex-end",
+    width: '50%',
+    alignItems: 'flex-end',
     marginTop: 35,
   },
   logo: {

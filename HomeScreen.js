@@ -1,23 +1,23 @@
-import React from "react";
-import { View, Text, Image } from "react-native";
-import { ScrollView, TouchableOpacity } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import * as Animatable from "react-native-animatable";
-import SearchBar from "./src/Components/SearchBar";
+import React from 'react';
+import { View, Text, Image } from 'react-native';
+import { ScrollView, TouchableOpacity } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import * as Animatable from 'react-native-animatable';
+import SearchBar from './src/Components/SearchBar';
 
 const HomeScreen = ({ navigation }) => {
   return (
     <ScrollView>
       <View
         style={{
-          backgroundColor: "#F6F5EF",
+          backgroundColor: '#F6F5EF',
           flex: 1,
         }}
       >
         <View
           style={{
-            backgroundColor: "teal",
-            height: "20%",
+            backgroundColor: 'teal',
+            height: '20%',
             borderBottomLeftRadius: 20,
             borderBottomRightRadius: 20,
             paddingHorizontal: 20,
@@ -25,30 +25,30 @@ const HomeScreen = ({ navigation }) => {
         >
           <View
             style={{
-              flexDirection: "row",
-              alignItems: "center",
+              flexDirection: 'row',
+              alignItems: 'center',
               marginTop: 25,
-              width: "100%",
+              width: '100%',
             }}
           >
             <Animatable.View
               animation="fadeInLeft"
               duration={1000}
-              style={{ width: "50%" }}
+              style={{ width: '50%' }}
             >
               <Text
                 style={{
                   fontSize: 28,
-                  color: "#FFF",
-                  fontWeight: "bold",
+                  color: '#FFF',
+                  fontWeight: 'bold',
                 }}
               >
-                What's Your Favourite Place ?{" "}
+                What's Your Favourite Place ?{' '}
               </Text>
             </Animatable.View>
-            <View style={{ width: "50%", alignItems: "flex-end" }}>
+            <View style={{ width: '50%', alignItems: 'flex-end' }}>
               <Image
-                source={require("./images/w2.jpg")}
+                source={require('./images/w2.jpg')}
                 style={{
                   height: 60,
                   width: 60,
@@ -63,39 +63,41 @@ const HomeScreen = ({ navigation }) => {
           animation="fadeInLeft"
           duration={1000}
           style={{
-            flexDirection: "row",
+            flexDirection: 'row',
             paddingHorizontal: 20,
-            width: "100%",
-            alignItems: "center",
+            width: '100%',
+            alignItems: 'center',
             marginTop: 15,
           }}
         >
-          <View style={{ width: "50%" }}>
+          <View style={{ width: '50%' }}>
             <Text
               style={{
-                fontWeight: "bold",
+                fontWeight: 'bold',
                 fontSize: 17,
-                color: "#585a61",
+                color: '#585a61',
               }}
             >
-              Recommended
+              Recommended Tours
             </Text>
           </View>
-          <View style={{ width: "50%", alignItems: "flex-end" }}>
+          <View style={{ width: '50%', alignItems: 'flex-end' }}>
             <View
               style={{
-                backgroundColor: "#00a46c",
+                backgroundColor: '#00a46c',
                 paddingHorizontal: 20,
                 paddingVertical: 5,
                 borderRadius: 15,
               }}
             >
-              <TouchableOpacity onPress={() => navigation.navigate("Guide")}>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('TourScreens')}
+              >
                 <Text
                   style={{
-                    fontWeight: "bold",
+                    fontWeight: 'bold',
                     fontSize: 13,
-                    color: "#FFF",
+                    color: '#FFF',
                   }}
                 >
                   More
@@ -113,12 +115,12 @@ const HomeScreen = ({ navigation }) => {
             // upper part pics
             horizontal
             showsHorizontalScrollIndicator={false}
-            style={{ height: 400, width: "100%" }}
+            style={{ height: 400, width: '100%' }}
           >
             <LinearGradient
-              colors={["rgba(0,164,109,0.09)", "transparent"]}
+              colors={['rgba(0,164,109,0.09)', 'transparent']}
               style={{
-                position: "absolute",
+                position: 'absolute',
                 left: 0,
                 right: 0,
                 height: 100,
@@ -127,11 +129,11 @@ const HomeScreen = ({ navigation }) => {
               }}
             />
             <TouchableOpacity
-              onPress={() => navigation.navigate("DetailsScreenLahore")}
+              onPress={() => navigation.navigate('DetailsScreenLahore')}
               style={{
                 height: 250,
                 elevation: 2,
-                backgroundColor: "#FFF",
+                backgroundColor: '#FFF',
                 marginLeft: 20,
                 marginTop: 20,
                 borderRadius: 15,
@@ -140,27 +142,27 @@ const HomeScreen = ({ navigation }) => {
               }}
             >
               <Image
-                style={{ height: 180, width: 160, overflow: "hidden" }}
-                source={require("./images/fort.jpg")}
+                style={{ height: 180, width: 160, overflow: 'hidden' }}
+                source={require('./images/fort.jpg')}
               />
               <View
                 style={{
-                  flexDirection: "row",
+                  flexDirection: 'row',
                   paddingTop: 10,
                   paddingHorizontal: 10,
                 }}
               >
                 <Text
                   style={{
-                    fontWeight: "bold",
+                    fontWeight: 'bold',
                   }}
                 >
-                  Lahore{" "}
+                  Lahore{' '}
                 </Text>
                 <Text
                   style={{
-                    fontWeight: "bold",
-                    color: "#00a46c",
+                    fontWeight: 'bold',
+                    color: '#00a46c',
                     paddingLeft: 50,
                   }}
                 >
@@ -170,170 +172,12 @@ const HomeScreen = ({ navigation }) => {
               <Text
                 style={{
                   paddingHorizontal: 10,
-                  fontWeight: "bold",
-                  color: "#b1e5d3",
+                  fontWeight: 'bold',
+                  color: '#b1e5d3',
                   paddingTop: 3,
                 }}
               >
                 Pakistan
-              </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              onPress={() => navigation.navigate("DetailsScreenIsl")}
-              style={{
-                height: 250,
-                elevation: 2,
-                backgroundColor: "#FFF",
-                marginLeft: 20,
-                marginTop: 20,
-                borderRadius: 15,
-                marginBottom: 10,
-                width: 160,
-              }}
-            >
-              <Image
-                style={{ height: 180, width: 160, overflow: "hidden" }}
-                source={require("./images/fm.jpeg")}
-              />
-              <View
-                style={{
-                  flexDirection: "row",
-                  paddingTop: 10,
-                  paddingHorizontal: 10,
-                }}
-              >
-                <Text
-                  style={{
-                    fontWeight: "bold",
-                  }}
-                >
-                  Islamabad{" "}
-                </Text>
-                <Text
-                  style={{
-                    fontWeight: "bold",
-                    color: "#00a46c",
-                    paddingLeft: 40,
-                  }}
-                >
-                  $400
-                </Text>
-              </View>
-              <Text
-                style={{
-                  paddingHorizontal: 10,
-                  fontWeight: "bold",
-                  color: "#b1e5d3",
-                  paddingTop: 3,
-                }}
-              >
-                Pakistan{" "}
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("DetailsScreenKr")}
-              style={{
-                height: 250,
-                elevation: 2,
-                backgroundColor: "#FFF",
-                marginLeft: 20,
-                marginTop: 20,
-                borderRadius: 15,
-                marginBottom: 10,
-                width: 160,
-              }}
-            >
-              <Image
-                style={{ height: 180, width: 160, overflow: "hidden" }}
-                source={require("./images/quaid.jpeg")}
-              />
-              <View
-                style={{
-                  flexDirection: "row",
-                  paddingTop: 10,
-                  paddingHorizontal: 10,
-                }}
-              >
-                <Text
-                  style={{
-                    fontWeight: "bold",
-                  }}
-                >
-                  Karachi{" "}
-                </Text>
-                <Text
-                  style={{
-                    fontWeight: "bold",
-                    color: "#00a46c",
-                    paddingLeft: 50,
-                  }}
-                >
-                  $400
-                </Text>
-              </View>
-              <Text
-                style={{
-                  paddingHorizontal: 10,
-                  fontWeight: "bold",
-                  color: "#b1e5d3",
-                  paddingTop: 3,
-                }}
-              >
-                Pakistan{" "}
-              </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              onPress={() => navigation.navigate("DetailsScreenMur")}
-              style={{
-                height: 250,
-                elevation: 2,
-                backgroundColor: "#FFF",
-                marginLeft: 20,
-                marginTop: 20,
-                borderRadius: 15,
-                marginBottom: 10,
-                width: 160,
-              }}
-            >
-              <Image
-                style={{ height: 180, width: 160, overflow: "hidden" }}
-                source={require("./images/muree.jpeg")}
-              />
-              <View
-                style={{
-                  flexDirection: "row",
-                  paddingTop: 10,
-                  paddingHorizontal: 10,
-                }}
-              >
-                <Text
-                  style={{
-                    fontWeight: "bold",
-                  }}
-                >
-                  North{" "}
-                </Text>
-                <Text
-                  style={{
-                    fontWeight: "bold",
-                    color: "#00a46c",
-                    paddingLeft: 65,
-                  }}
-                >
-                  $400
-                </Text>
-              </View>
-              <Text
-                style={{
-                  paddingHorizontal: 10,
-                  fontWeight: "bold",
-                  color: "#b1e5d3",
-                  paddingTop: 3,
-                }}
-              >
-                Pakistan{" "}
               </Text>
             </TouchableOpacity>
           </ScrollView>
@@ -342,39 +186,41 @@ const HomeScreen = ({ navigation }) => {
           animation="fadeInLeft"
           duration={1000}
           style={{
-            flexDirection: "row",
+            flexDirection: 'row',
             paddingHorizontal: 20,
-            width: "100%",
-            alignItems: "center",
+            width: '100%',
+            alignItems: 'center',
             marginTop: -80,
           }}
         >
-          <View style={{ width: "50%" }}>
+          <View style={{ width: '50%' }}>
             <Text
               style={{
-                fontWeight: "bold",
+                fontWeight: 'bold',
                 fontSize: 17,
-                color: "#585a61",
+                color: '#585a61',
               }}
             >
-              Featured Places
+              Featured Hotels
             </Text>
           </View>
-          <View style={{ width: "50%", alignItems: "flex-end" }}>
+          <View style={{ width: '50%', alignItems: 'flex-end' }}>
             <View
               style={{
-                backgroundColor: "#00a46c",
+                backgroundColor: '#00a46c',
                 paddingHorizontal: 20,
                 paddingVertical: 5,
                 borderRadius: 15,
               }}
             >
-              <TouchableOpacity onPress={() => navigation.navigate("Guide")}>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('HotelsScreens')}
+              >
                 <Text
                   style={{
-                    fontWeight: "bold",
+                    fontWeight: 'bold',
                     fontSize: 13,
-                    color: "#FFF",
+                    color: '#FFF',
                   }}
                 >
                   More
@@ -394,36 +240,10 @@ const HomeScreen = ({ navigation }) => {
             style={{ marginBottom: -100 }}
           >
             <TouchableOpacity
-              onPress={() => navigation.navigate("DetailsScreenLahore")}
+              onPress={() => navigation.navigate('DetailsScreenLahore')}
             >
               <Image
-                source={require("./images/minar.jpeg")}
-                style={{
-                  marginTop: 20,
-                  borderRadius: 10,
-                  height: 200,
-                  marginHorizontal: 20,
-                }}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("DetailsScreenKr")}
-            >
-              <Image
-                source={require("./images/karachi1.jpeg")}
-                style={{
-                  marginTop: 20,
-                  borderRadius: 10,
-                  height: 200,
-                  marginHorizontal: 20,
-                }}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("DetailsScreenMul")}
-            >
-              <Image
-                source={require("./images/multan.jpeg")}
+                source={require('./images/minar.jpeg')}
                 style={{
                   marginTop: 20,
                   borderRadius: 10,

@@ -7,7 +7,9 @@ const BookingCard = ({ bookingData, onCancelPress }) => {
       <View style={styles.dataContainer}>
         {/* LEFT container */}
         <View style={styles.leftContainer}>
-          <Text style={styles.name}>{bookingData.tour}</Text>
+          <Text style={styles.name} ellipsizeMode="tail" numberOfLines={1}>
+            {bookingData.product}
+          </Text>
 
           <View
             style={{
@@ -60,7 +62,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: 450,
-    elevation: 5,
+    //maxWidth: "100%",
     margin: 8,
     backgroundColor: '#292929',
     borderRadius: 15,
@@ -93,6 +95,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'teal',
     marginLeft: 10,
+    maxWidth: '80%',
   },
   button: {
     backgroundColor: 'red',

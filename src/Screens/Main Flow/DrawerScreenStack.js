@@ -1,12 +1,13 @@
-import React from "react";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import React from 'react';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import { DrawerContent } from "./DrawerContent";
-import MainTabScreen from "./MainTabScreen";
+import { DrawerContent } from './DrawerContent';
+import Icon from '@expo/vector-icons/MaterialIcons';
+import MainTabScreen from './MainTabScreen';
 
-import MyHotelBookings from "./MyHotelBookings";
-import MyProductBookings from "./MyProductBookings";
-import MyTourBookings from "./MyTourBookings";
+import MyHotelBookings from './HotelScreens/MyHotelBookings';
+import MyProductBookings from './ProductScreens/MyProductBookings';
+import MyTourBookings from './TourScreens/MyTourBookings';
 
 const Drawer = createDrawerNavigator();
 

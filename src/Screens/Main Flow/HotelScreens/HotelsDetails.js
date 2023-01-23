@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext } from 'react';
 
 import {
   View,
@@ -7,20 +7,20 @@ import {
   Image,
   TouchableOpacity,
   FlatList,
-} from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import * as Animatable from "react-native-animatable";
-import { AntDesign } from "@expo/vector-icons";
-import DatePicker from "../../Components/DatePicker";
-import wandererAPI from "../../api/Wanderer";
-import { Context as AuthContext } from "../../Context/AuthContext";
-import StripeCheckout from "react-native-simple-stripe";
-import { Overlay } from "@rneui/themed";
+} from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import * as Animatable from 'react-native-animatable';
+import { AntDesign } from '@expo/vector-icons';
+import DatePicker from '../../../Components/DatePicker';
+import wandererAPI from '../../../api/Wanderer';
+import { Context as AuthContext } from '../../../Context/AuthContext';
+import StripeCheckout from 'react-native-simple-stripe';
+import { Overlay } from '@rneui/themed';
 
 const HotelDetails = ({ route, navigation }) => {
   const { hoteldetails } = route.params;
   const publicKey =
-    "pk_test_51M2qZEJdqzfSzjlZrwNofnmcIZtUP3D9f8JRh3mCzj4f2kmBcXaHarx6pCr7D4dLBVWaHidXsY7MctqwxUwD0BQe00dGUcMYUU";
+    'pk_test_51M2qZEJdqzfSzjlZrwNofnmcIZtUP3D9f8JRh3mCzj4f2kmBcXaHarx6pCr7D4dLBVWaHidXsY7MctqwxUwD0BQe00dGUcMYUU';
   const { state } = useContext(AuthContext);
   const user = JSON.parse(state.token);
   const [startDate, onChangeStartDate] = useState(new Date());
@@ -42,7 +42,7 @@ const HotelDetails = ({ route, navigation }) => {
 
   const onToken = async (token) => {
     try {
-      const response = await wandererAPI.post("/api/bookings/bookroom", {
+      const response = await wandererAPI.post('/api/bookings/bookroom', {
         room: hoteldetails,
         userid: user._id,
         fromdate: startDate,
@@ -53,17 +53,17 @@ const HotelDetails = ({ route, navigation }) => {
       });
       {
         response.data
-          ? (alert("Payment Successful, Your Room is booked"),
+          ? (alert('Payment Successful, Your Room is booked'),
             navigation.goBack())
-          : alert("Something went wrong. Try Again!");
+          : alert('Something went wrong. Try Again!');
       }
     } catch (error) {
-      console.log("BOOKERROR", error);
+      console.log('BOOKERROR', error);
     }
   };
 
   return (
-    <LinearGradient colors={["white", "white"]} style={styles.container}>
+    <LinearGradient colors={['white', 'white']} style={styles.container}>
       <View style={styles.header}>
         <FlatList
           data={hoteldetails.imageurls}
@@ -72,7 +72,7 @@ const HotelDetails = ({ route, navigation }) => {
           renderItem={({ item }) => {
             return (
               <Image
-                style={{ height: "100%", width: 500 }}
+                style={{ height: '100%', width: 500 }}
                 source={{ uri: item }}
               />
             );
@@ -92,19 +92,19 @@ const HotelDetails = ({ route, navigation }) => {
         <Text style={styles.price}>Rs. {hoteldetails.rentperday}/day</Text>
         <Text style={styles.text}> Reviews:</Text>
 
-        <Text style={styles.reviewValue}>{"  "}4.8</Text>
+        <Text style={styles.reviewValue}>{'  '}4.8</Text>
         <Text style={styles.description}>Description:</Text>
         <Text style={styles.text}>{hoteldetails.discription}</Text>
 
-        <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
           <DatePicker
-            title={"Select Start Date"}
+            title={'Select Start Date'}
             onChangeDate={onChangeStartDate}
             value={new Date()}
             minimumDate={new Date()}
           />
           <DatePicker
-            title={"Select End Date"}
+            title={'Select End Date'}
             onChangeDate={onChangeEndDate}
             value={startDate}
             minimumDate={startDate}
@@ -113,7 +113,7 @@ const HotelDetails = ({ route, navigation }) => {
         <Overlay
           isVisible={visible}
           onBackdropPress={toggleOverlay}
-          overlayStyle={{ backgroundColor: "transparent", elevation: -2 }}
+          overlayStyle={{ backgroundColor: 'transparent', elevation: -2 }}
         >
           <StripeCheckout token={onToken} stripeKey={publicKey} />
         </Overlay>
@@ -125,7 +125,7 @@ const HotelDetails = ({ route, navigation }) => {
             }}
           >
             <LinearGradient
-              colors={["#606A6D", "#14FC9B"]}
+              colors={['#606A6D', '#14FC9B']}
               style={styles.SignIn}
             >
               <Text style={styles.textSign}>Book Now</Text>
@@ -144,18 +144,18 @@ const styles = StyleSheet.create({
   },
   header: {
     flex: 2,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   backButton: {
-    position: "absolute",
-    alignSelf: "flex-start",
-    top: "-150%",
-    left: "5%",
+    position: 'absolute',
+    alignSelf: 'flex-start',
+    top: '-150%',
+    left: '5%',
   },
   footer: {
     height: 400,
-    backgroundColor: "#6B3940",
+    backgroundColor: '#6B3940',
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     paddingVertical: 50,
@@ -169,49 +169,49 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    color: "white",
+    color: 'white',
     fontSize: 23,
-    fontWeight: "bold",
-    maxWidth: "55%",
+    fontWeight: 'bold',
+    maxWidth: '55%',
   },
 
   text: {
-    color: "grey",
+    color: 'grey',
     marginTop: 10,
   },
 
   button: {
-    alignItems: "flex-end",
+    alignItems: 'flex-end',
     marginTop: 10,
   },
 
   SignIn: {
     width: 350,
     height: 50,
-    justifyContent: "center",
+    justifyContent: 'center',
     borderRadius: 50,
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   textSign: {
-    color: "white",
+    color: 'white',
     fontSize: 16,
     marginTop: 15,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   price: {
-    color: "gold",
+    color: 'gold',
     marginLeft: 300,
     fontSize: 20,
     marginTop: -28,
   },
   reviewValue: {
-    color: "gold",
+    color: 'gold',
     marginLeft: 60,
     marginTop: -19,
   },
   description: {
     marginTop: 10,
     marginLeft: 3,
-    color: "white",
+    color: 'white',
   },
 });

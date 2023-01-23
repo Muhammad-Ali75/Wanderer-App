@@ -1,4 +1,5 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext } from 'react';
+
 import {
   View,
   Text,
@@ -6,20 +7,20 @@ import {
   Image,
   TouchableOpacity,
   FlatList,
-} from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import * as Animatable from "react-native-animatable";
-import { AntDesign } from "@expo/vector-icons";
-import DatePicker from "../../Components/DatePicker";
-import wandererAPI from "../../api/Wanderer";
-import { Context as AuthContext } from "../../Context/AuthContext";
-import StripeCheckout from "react-native-simple-stripe";
-import { Overlay } from "@rneui/themed";
+} from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import * as Animatable from 'react-native-animatable';
+import { AntDesign } from '@expo/vector-icons';
+import DatePicker from '../../../Components/DatePicker';
+import wandererAPI from '../../../api/Wanderer';
+import { Context as AuthContext } from '../../../Context/AuthContext';
+import StripeCheckout from 'react-native-simple-stripe';
+import { Overlay } from '@rneui/themed';
 
-const TourDetails = ({ route, navigation }) => {
-  const { tourdetails } = route.params;
+const ProductDetails = ({ route, navigation }) => {
+  const { productdetails } = route.params;
   const publicKey =
-    "pk_test_51M2qZEJdqzfSzjlZrwNofnmcIZtUP3D9f8JRh3mCzj4f2kmBcXaHarx6pCr7D4dLBVWaHidXsY7MctqwxUwD0BQe00dGUcMYUU";
+    'pk_test_51M2qZEJdqzfSzjlZrwNofnmcIZtUP3D9f8JRh3mCzj4f2kmBcXaHarx6pCr7D4dLBVWaHidXsY7MctqwxUwD0BQe00dGUcMYUU';
   const { state } = useContext(AuthContext);
   const user = JSON.parse(state.token);
   const [startDate, onChangeStartDate] = useState(new Date());
@@ -41,8 +42,9 @@ const TourDetails = ({ route, navigation }) => {
 
   const onToken = async (token) => {
     try {
-      const response = await wandererAPI.post("/api/tourbookings/booktour", {
-        tour: tourdetails,
+      //todo add api endpoint
+      const response = await wandererAPI.post('', {
+        product: productdetails,
         userid: user._id,
         fromdate: startDate,
         todate: endDate,
@@ -52,26 +54,26 @@ const TourDetails = ({ route, navigation }) => {
       });
       {
         response.data
-          ? (alert("Payment Successful, Your Tour is booked."),
+          ? (alert('Payment Successful, Your Item is booked.'),
             navigation.goBack())
-          : alert("Something went wrong. Try Again!");
+          : alert('Something went wrong. Try Again!');
       }
     } catch (error) {
-      console.log("BOOKERROR", error);
+      console.log('BOOKERROR', error);
     }
   };
 
   return (
-    <LinearGradient colors={["white", "white"]} style={styles.container}>
+    <LinearGradient colors={['white', 'white']} style={styles.container}>
       <View style={styles.header}>
         <FlatList
-          data={tourdetails.imageurls}
+          data={productdetails.imageurls}
           horizontal={true}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => {
             return (
               <Image
-                style={{ height: "100%", width: 500 }}
+                style={{ height: '100%', width: 500 }}
                 source={{ uri: item }}
               />
             );
@@ -85,25 +87,23 @@ const TourDetails = ({ route, navigation }) => {
         >
           <AntDesign name="arrowleft" size={30} color="white" />
         </TouchableOpacity>
-        <Text style={styles.title} ellipsizeMode="tail" numberOfLines={4}>
-          {tourdetails.name}
-        </Text>
-        <Text style={styles.price}>Rs. {tourdetails.rentperday}/day</Text>
+        <Text style={styles.title}>{productdetails.name}</Text>
+        <Text style={styles.price}>Rs. {productdetails.price}</Text>
         <Text style={styles.text}> Reviews:</Text>
 
-        <Text style={styles.reviewValue}>{"  "}4.8</Text>
+        <Text style={styles.reviewValue}>{'  '}4.8</Text>
         <Text style={styles.description}>Description:</Text>
-        <Text style={styles.text}>{tourdetails.description}</Text>
+        <Text style={styles.text}>{productdetails.discription}</Text>
 
-        <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
           <DatePicker
-            title={"Select Start Date"}
+            title={'Select Start Date'}
             onChangeDate={onChangeStartDate}
             value={new Date()}
             minimumDate={new Date()}
           />
           <DatePicker
-            title={"Select End Date"}
+            title={'Select End Date'}
             onChangeDate={onChangeEndDate}
             value={startDate}
             minimumDate={startDate}
@@ -112,7 +112,7 @@ const TourDetails = ({ route, navigation }) => {
         <Overlay
           isVisible={visible}
           onBackdropPress={toggleOverlay}
-          overlayStyle={{ backgroundColor: "transparent", elevation: -2 }}
+          overlayStyle={{ backgroundColor: 'transparent', elevation: -2 }}
         >
           <StripeCheckout token={onToken} stripeKey={publicKey} />
         </Overlay>
@@ -124,7 +124,7 @@ const TourDetails = ({ route, navigation }) => {
             }}
           >
             <LinearGradient
-              colors={["#606A6D", "#14FC9B"]}
+              colors={['#606A6D', '#14FC9B']}
               style={styles.SignIn}
             >
               <Text style={styles.textSign}>Book Now</Text>
@@ -136,26 +136,25 @@ const TourDetails = ({ route, navigation }) => {
   );
 };
 
-export default TourDetails;
-
+export default ProductDetails;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
   header: {
     flex: 2,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   backButton: {
-    position: "absolute",
-    alignSelf: "flex-start",
-    top: "-150%",
-    left: "5%",
+    position: 'absolute',
+    alignSelf: 'flex-start',
+    top: '-150%',
+    left: '5%',
   },
   footer: {
     height: 400,
-    backgroundColor: "#292929",
+    backgroundColor: '#5B2C6F',
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     paddingVertical: 50,
@@ -169,49 +168,48 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    color: "white",
+    color: 'white',
     fontSize: 23,
-    fontWeight: "bold",
-    maxWidth: "55%",
+    fontWeight: 'bold',
   },
 
   text: {
-    color: "grey",
+    color: 'grey',
     marginTop: 10,
   },
 
   button: {
-    alignItems: "flex-end",
-    marginTop: 10,
+    alignItems: 'flex-end',
+    marginTop: 20,
   },
 
   SignIn: {
     width: 350,
     height: 50,
-    justifyContent: "center",
+    justifyContent: 'center',
     borderRadius: 50,
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   textSign: {
-    color: "white",
+    color: 'white',
     fontSize: 16,
     marginTop: 15,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   price: {
-    color: "gold",
+    color: 'gold',
     marginLeft: 300,
     fontSize: 20,
     marginTop: -28,
   },
   reviewValue: {
-    color: "gold",
+    color: 'gold',
     marginLeft: 60,
     marginTop: -19,
   },
   description: {
     marginTop: 10,
     marginLeft: 3,
-    color: "white",
+    color: 'white',
   },
 });

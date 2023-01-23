@@ -1,18 +1,18 @@
-import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
-import Icon from "@expo/vector-icons/Ionicons";
-import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+import Icon from '@expo/vector-icons/Ionicons';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
-import homeScreen from "../../../HomeScreen";
+import homeScreen from '../../../HomeScreen';
 
-import { FontAwesome5 } from "@expo/vector-icons";
-import { MaterialIcons } from "@expo/vector-icons";
-import Hotels from "./Hotels";
-import HotelDetails from "./HotelsDetails";
-import Products from "./Products";
-import ProductDetails from "./ProductDetails";
-import Tours from "./Tours";
-import TourDetails from "./TourDetails";
+import { FontAwesome5 } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
+import Hotels from './HotelScreens/Hotels';
+import HotelDetails from './HotelScreens/HotelsDetails';
+import Products from './ProductScreens/Products';
+import ProductDetails from './ProductScreens/ProductDetails';
+import Tours from './TourScreens/Tours';
+import TourDetails from './TourScreens/TourDetails';
 
 const HomeStack = createStackNavigator();
 const ProductStack = createStackNavigator();
@@ -27,8 +27,8 @@ const MainTabScreen = () => (
       name="HomeScreen"
       component={HomeStackScreen}
       options={{
-        tabBarLabel: "Home",
-        tabBarColor: "teal",
+        tabBarLabel: 'Home',
+        tabBarColor: 'teal',
         tabBarIcon: ({ color }) => (
           <Icon name="ios-home" color={color} size={26} />
         ),
@@ -38,8 +38,8 @@ const MainTabScreen = () => (
       name="TourScreens"
       component={TourStackScreen}
       options={{
-        tabBarLabel: "Tour",
-        tabBarColor: "#292929",
+        tabBarLabel: 'Tour',
+        tabBarColor: '#292929',
 
         tabBarIcon: ({ color }) => (
           <MaterialIcons name="tour" size={24} color={color} />
@@ -50,8 +50,8 @@ const MainTabScreen = () => (
       name="HotelsScreens"
       component={HotelStackScreen}
       options={{
-        tabBarLabel: "Hotels",
-        tabBarColor: "#6B3940",
+        tabBarLabel: 'Hotels',
+        tabBarColor: '#6B3940',
 
         tabBarIcon: ({ color }) => (
           <FontAwesome5 name="hotel" size={24} color={color} />
@@ -62,8 +62,8 @@ const MainTabScreen = () => (
       name="ProductsScreens"
       component={ProductStackScreen}
       options={{
-        tabBarLabel: "Products",
-        tabBarColor: "#292929",
+        tabBarLabel: 'Products',
+        tabBarColor: '#5B2C6F',
 
         tabBarIcon: ({ color }) => (
           <FontAwesome5 name="shopping-bag" size={24} color={color} />
@@ -78,11 +78,11 @@ const HomeStackScreen = ({ navigation }) => (
   <HomeStack.Navigator
     screenOptions={{
       headerStyle: {
-        backgroundColor: "teal",
+        backgroundColor: 'teal',
       },
-      headerTintColor: "white",
+      headerTintColor: 'white',
       headerTitleStyle: {
-        fontWeight: "bold",
+        fontWeight: 'bold',
       },
     }}
   >
@@ -90,7 +90,7 @@ const HomeStackScreen = ({ navigation }) => (
       name="Home "
       component={homeScreen}
       options={{
-        title: "Home Screen",
+        title: 'Home Screen',
         headerLeft: () => (
           <Icon.Button
             name="ios-menu"
