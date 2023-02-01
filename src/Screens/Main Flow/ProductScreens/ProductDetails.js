@@ -61,7 +61,11 @@ const ProductDetails = ({ route, navigation }) => {
   return (
     <LinearGradient colors={['white', 'white']} style={styles.container}>
       <View style={styles.header}>
-        <FlatList
+        <Image
+          style={{ height: '100%', width: 500 }}
+          source={require('../../../../images/no-image.png')}
+        />
+        {/* <FlatList
           data={productdetails.imageurls}
           horizontal={true}
           keyExtractor={(item, index) => index.toString()}
@@ -73,7 +77,7 @@ const ProductDetails = ({ route, navigation }) => {
               />
             );
           }}
-        />
+        /> */}
       </View>
       <Animatable.View animation="fadeInUpBig" style={styles.footer}>
         <TouchableOpacity
