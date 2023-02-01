@@ -1,8 +1,8 @@
-import axios from "axios";
-import * as SecureStore from "expo-secure-store";
+import axios from 'axios';
+import * as SecureStore from 'expo-secure-store';
 
 export default axios.create({
-  baseURL: "https://wanderer-server.vercel.app/",
+  baseURL: 'https://wanderer-server.vercel.app',
 });
 
 // UserAPI.interceptors.request.use(async function(config) {

@@ -25,8 +25,6 @@ const ProductDetails = ({ route, navigation }) => {
   const user = JSON.parse(state.token);
   const [startDate, onChangeStartDate] = useState(new Date());
   const [endDate, onChangeEndDate] = useState(new Date());
-  const [totalDays, setTotalDays] = useState(0);
-  const [totalAmount, setTotalAmount] = useState();
   const [visible, setVisible] = useState(false);
 
   const toggleOverlay = () => {
@@ -43,13 +41,10 @@ const ProductDetails = ({ route, navigation }) => {
   const onToken = async (token) => {
     try {
       //todo add api endpoint
-      const response = await wandererAPI.post('', {
+      const response = await wandererAPI.post('/api/buyproducts/reserve', {
         product: productdetails,
         userid: user._id,
-        fromdate: startDate,
-        todate: endDate,
-        totalAmount: totalAmount,
-        totaldays: totalDays,
+        price: productdetails.price,
         token: token,
       });
       {
@@ -59,7 +54,7 @@ const ProductDetails = ({ route, navigation }) => {
           : alert('Something went wrong. Try Again!');
       }
     } catch (error) {
-      console.log('BOOKERROR', error);
+      console.log('BOOKERROR', JSON.stringify(error.response, null, 2));
     }
   };
 
@@ -95,7 +90,7 @@ const ProductDetails = ({ route, navigation }) => {
         <Text style={styles.description}>Description:</Text>
         <Text style={styles.text}>{productdetails.discription}</Text>
 
-        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+        {/* <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
           <DatePicker
             title={'Select Start Date'}
             onChangeDate={onChangeStartDate}
@@ -108,7 +103,7 @@ const ProductDetails = ({ route, navigation }) => {
             value={startDate}
             minimumDate={startDate}
           />
-        </View>
+        </View> */}
         <Overlay
           isVisible={visible}
           onBackdropPress={toggleOverlay}
@@ -119,7 +114,7 @@ const ProductDetails = ({ route, navigation }) => {
         <View style={styles.button}>
           <TouchableOpacity
             onPress={() => {
-              calTotals();
+              // calTotals();
               toggleOverlay();
             }}
           >

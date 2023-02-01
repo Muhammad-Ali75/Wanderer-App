@@ -6,15 +6,18 @@ import TourCard from './TourCard';
 import wandererApi from '../../../api/Wanderer';
 import SearchBar from '../../../Components/SearchBar';
 import { AntDesign } from '@expo/vector-icons';
+import { ActivityIndicator } from 'react-native-paper';
+import { useIsFocused } from '@react-navigation/native';
 
 const Tour = ({ navigation }) => {
   const [tour, setTourData] = useState([]);
   const [tourOriginal, setTourOriginal] = useState([]);
   const [search, setSearch] = useState('');
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     apicall();
-  }, []);
+  }, [isFocused]);
 
   const apicall = async () => {
     try {
@@ -75,7 +78,7 @@ const Tour = ({ navigation }) => {
         </View>
       </View>
       <SearchBar value={search} onChange={(text) => datafilter(text)} />
-      {tour && (
+      {tour.length != 0 ? (
         <FlatList
           data={tour}
           keyExtractor={(item) => item._id}
@@ -83,6 +86,8 @@ const Tour = ({ navigation }) => {
             return <TourCard tour={item} />;
           }}
         />
+      ) : (
+        <ActivityIndicator animating={true} color={'teal'} size="large" />
       )}
     </>
   );

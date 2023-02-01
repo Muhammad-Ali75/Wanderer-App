@@ -6,15 +6,18 @@ import HotelCard from './HotelCard';
 import wandererApi from '../../../api/Wanderer';
 import SearchBar from '../../../Components/SearchBar';
 import { AntDesign } from '@expo/vector-icons';
+import { ActivityIndicator } from 'react-native-paper';
+import { useIsFocused } from '@react-navigation/native';
 
 const Hotels = ({ navigation }) => {
   const [hotelsData, setHotelData] = useState([]);
   const [hotelOriginal, setHotelOriginal] = useState([]);
   const [search, setSearch] = useState('');
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     apicall();
-  }, []);
+  }, [isFocused]);
 
   const apicall = async () => {
     try {
@@ -74,7 +77,7 @@ const Hotels = ({ navigation }) => {
         </View>
       </View>
       <SearchBar value={search} onChange={(text) => datafilter(text)} />
-      {hotelsData && (
+      {hotelsData.length != 0 ? (
         <FlatList
           data={hotelsData}
           keyExtractor={(item) => item._id}
@@ -82,6 +85,8 @@ const Hotels = ({ navigation }) => {
             return <HotelCard hotel={item} />;
           }}
         />
+      ) : (
+        <ActivityIndicator animating={true} color={'teal'} size="large" />
       )}
     </>
   );

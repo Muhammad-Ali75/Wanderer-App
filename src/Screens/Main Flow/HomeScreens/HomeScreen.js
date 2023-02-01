@@ -11,14 +11,16 @@ import { ActivityIndicator } from 'react-native-paper';
 import wandererAPI from '../../../api/Wanderer';
 import CardTour from './CardTour';
 import CardHotel from './CardHotel';
+import { useIsFocused } from '@react-navigation/native';
 
 const HomeScreen = ({ navigation }) => {
   const [tourData, setTourData] = useState();
   const [hotelData, setHotelData] = useState();
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     apicall();
-  }, []);
+  }, [isFocused]);
 
   const apicall = async () => {
     try {
