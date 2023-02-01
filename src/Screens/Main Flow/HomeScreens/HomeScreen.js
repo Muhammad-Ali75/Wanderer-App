@@ -37,7 +37,9 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container0}>
       <View style={styles.headerContainer}>
-        <Text style={styles.headerText}>Where do you want to go?</Text>
+        <Text style={styles.headerText} numberOfLines={2}>
+          Where do you want to go?
+        </Text>
         <Image
           style={styles.logo}
           source={require('../../../../images/w2.jpg')}
@@ -126,6 +128,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     color: 'white',
+    width: '60%',
   },
   logo: {
     height: 70,

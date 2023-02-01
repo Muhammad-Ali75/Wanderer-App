@@ -80,10 +80,12 @@ const ProductDetails = ({ route, navigation }) => {
           style={styles.backButton}
           onPress={() => navigation.goBack()}
         >
-          <AntDesign name="arrowleft" size={30} color="white" />
+          <AntDesign name="arrowleft" size={30} color="black" />
         </TouchableOpacity>
         <Text style={styles.title}>{productdetails.name}</Text>
-        <Text style={styles.price}>Rs. {productdetails.price}</Text>
+        <Text style={styles.price} numberOfLines={2}>
+          Rs. {productdetails.price}
+        </Text>
         <Text style={styles.text}> Reviews:</Text>
 
         <Text style={styles.reviewValue}>{'  '}4.8</Text>
@@ -92,13 +94,13 @@ const ProductDetails = ({ route, navigation }) => {
 
         {/* <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
           <DatePicker
-            title={'Select Start Date'}
+            title={'Start Date'}
             onChangeDate={onChangeStartDate}
             value={new Date()}
             minimumDate={new Date()}
           />
           <DatePicker
-            title={'Select End Date'}
+            title={'End Date'}
             onChangeDate={onChangeEndDate}
             value={startDate}
             minimumDate={startDate}
@@ -137,14 +139,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    flex: 2,
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
   backButton: {
     position: 'absolute',
     alignSelf: 'flex-start',
-    top: '-150%',
+    top: '-80%',
     left: '5%',
   },
   footer: {
@@ -155,6 +157,7 @@ const styles = StyleSheet.create({
     paddingVertical: 50,
     paddingHorizontal: 30,
     marginTop: -25,
+    flex: 1,
   },
 
   logo: {
@@ -193,9 +196,9 @@ const styles = StyleSheet.create({
   },
   price: {
     color: 'gold',
-    marginLeft: 300,
     fontSize: 20,
     marginTop: -28,
+    textAlign: 'right',
   },
   reviewValue: {
     color: 'gold',

@@ -97,13 +97,13 @@ const TourDetails = ({ route, navigation }) => {
 
         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
           <DatePicker
-            title={'Select Start Date'}
+            title={'Start Date'}
             onChangeDate={onChangeStartDate}
             value={new Date()}
             minimumDate={new Date()}
           />
           <DatePicker
-            title={'Select End Date'}
+            title={'End Date'}
             onChangeDate={onChangeEndDate}
             value={startDate}
             minimumDate={startDate}
@@ -143,14 +143,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    flex: 2,
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
   backButton: {
     position: 'absolute',
     alignSelf: 'flex-start',
-    top: '-150%',
+    top: '-80%',
     left: '5%',
   },
   footer: {
@@ -161,6 +161,7 @@ const styles = StyleSheet.create({
     paddingVertical: 50,
     paddingHorizontal: 30,
     marginTop: -25,
+    flex: 1,
   },
 
   logo: {
@@ -172,7 +173,6 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 23,
     fontWeight: 'bold',
-    maxWidth: '55%',
   },
 
   text: {
@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
   },
   price: {
     color: 'gold',
-    marginLeft: 300,
+    textAlign: 'right',
     fontSize: 20,
     marginTop: -28,
   },

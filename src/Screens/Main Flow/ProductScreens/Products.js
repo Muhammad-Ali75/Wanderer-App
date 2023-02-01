@@ -104,25 +104,17 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
     paddingHorizontal: 20,
-  },
-  slide: {
+
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#FFF',
   },
   backArrow: {
-    marginTop: 50,
-    marginLeft: 5,
-    tintColor: 'white',
-    width: '5%',
-    height: 13,
+    marginTop: 35,
   },
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 30,
-    width: '100%',
+    justifyContent: 'space-between',
+    flex: 1,
   },
   text: {
     fontSize: 28,
@@ -131,7 +123,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   logoContainer: {
-    width: '43%',
     alignItems: 'flex-end',
     marginTop: 35,
   },

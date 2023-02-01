@@ -31,7 +31,7 @@ export default CardHotel;
 
 const styles = StyleSheet.create({
   card: {
-    height: '90%',
+    height: '92%',
     width: 300,
     elevation: 2,
     backgroundColor: '#FFF',
