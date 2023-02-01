@@ -60,22 +60,13 @@ const MyBookings = ({ navigation }) => {
 
   return (
     <View style={styles.container0}>
-      <View
-        style={{
-          flexDirection: 'row',
-          paddingTop: 40,
-          justifyContent: 'flex-start',
-          marginBottom: 30,
-        }}
+      <TouchableOpacity
+        style={{ alignSelf: 'flex-start', margin: 40, marginBottom: 20 }}
+        onPress={() => navigation.goBack()}
       >
-        <TouchableOpacity
-          style={{ marginLeft: -100, paddingTop: 8, marginTop: 10 }}
-          onPress={() => navigation.goBack()}
-        >
-          <AntDesign name="arrowleft" size={30} color="white" />
-        </TouchableOpacity>
-        <Text style={styles.header}>Hotel Bookings</Text>
-      </View>
+        <AntDesign name="arrowleft" size={30} color="white" />
+      </TouchableOpacity>
+      <Text style={styles.header}>Hotel Bookings</Text>
       {bookings ? (
         bookings.length == 0 ? (
           <Text style={{ color: 'red', fontSize: 15, fontWeight: 'bold' }}>
@@ -111,6 +102,6 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 40,
     fontWeight: 'bold',
-    marginLeft: 100,
+    marginBottom: 10,
   },
 });

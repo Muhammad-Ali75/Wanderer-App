@@ -61,8 +61,8 @@ export default BookingCard;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: 450,
-    //maxWidth: "100%",
+    width: '100%',
+    maxWidth: 400,
     margin: 8,
     backgroundColor: '#292929',
     borderRadius: 15,
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: 'red',
     height: 50,
-    width: 450,
+    width: 400,
     justifyContent: 'center',
     alignItems: 'center',
     borderBottomLeftRadius: 15,
