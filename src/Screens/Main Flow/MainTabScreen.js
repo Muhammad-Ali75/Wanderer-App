@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Icon from '@expo/vector-icons/Ionicons';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
-import homeScreen from '../../../HomeScreen';
+import homeScreen from './HomeScreens/HomeScreen';
 
 import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';

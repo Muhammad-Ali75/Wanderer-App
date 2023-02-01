@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { Text, TouchableOpacity, StyleSheet } from "react-native";
-import DateTimePicker from "@react-native-community/datetimepicker";
-import { AntDesign } from "@expo/vector-icons";
+import React, { useState } from 'react';
+import { Text, TouchableOpacity, StyleSheet } from 'react-native';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import { AntDesign } from '@expo/vector-icons';
 
 const DatePicker = ({ title, onChangeDate, value, minimumDate }) => {
   const [date, changedate] = useState();
   const [show, setShow] = useState(false);
 
   const onChange = (event, selectedDate) => {
-    if (event.type == "dismissed") {
+    if (event.type == 'dismissed') {
       changedate(null);
       setShow(false);
     } else {
@@ -16,9 +16,9 @@ const DatePicker = ({ title, onChangeDate, value, minimumDate }) => {
       let tempDate = new Date(currentDate);
       let fDate =
         tempDate.getDate() +
-        "-" +
+        '-' +
         (tempDate.getMonth() + 1) +
-        "-" +
+        '-' +
         tempDate.getFullYear();
 
       changedate(fDate);
@@ -30,7 +30,9 @@ const DatePicker = ({ title, onChangeDate, value, minimumDate }) => {
   return (
     <TouchableOpacity style={styles.button} onPress={() => setShow(true)}>
       {date == null ? (
-        <Text style={styles.text}>{title}</Text>
+        <Text type="date" style={styles.text}>
+          {title}
+        </Text>
       ) : (
         <Text style={styles.text}>{date}</Text>
       )}
@@ -50,10 +52,10 @@ export default DatePicker;
 
 const styles = StyleSheet.create({
   button: {
-    flexDirection: "row",
-    alignContent: "center",
-    justifyContent: "center",
-    borderColor: "gold",
+    flexDirection: 'row',
+    alignContent: 'center',
+    justifyContent: 'center',
+    borderColor: 'gold',
     borderRadius: 10,
     borderWidth: 1,
     margin: 20,
@@ -63,9 +65,9 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 20,
-    color: "white",
-    textAlign: "center",
+    color: 'white',
+    textAlign: 'center',
     marginRight: 20,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
 });

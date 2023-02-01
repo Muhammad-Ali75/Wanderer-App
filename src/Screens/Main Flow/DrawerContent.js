@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
 import { View, StyleSheet } from 'react-native';
-import { Avatar, Title, Drawer, Caption, Paragraph } from 'react-native-paper';
+import { Avatar, Title, Drawer, Caption } from 'react-native-paper';
 import Icon from '@expo/vector-icons/MaterialIcons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
@@ -19,10 +19,8 @@ export function DrawerContent(props) {
           <View style={styles.userInfoSection}>
             <View style={{ flexDirection: 'row', marginTop: 15 }}>
               <Avatar.Image
-                source={{
-                  uri:
-                    'https://secure.gravatar.com/avatar/379c085d096680aec5f3eb733a942847',
-                }}
+                style={{ backgroundColor: 'white' }}
+                source={require('../../../assets/Person.png')}
               />
               <View style={{ flexDirection: 'column', marginLeft: 15 }}>
                 <Title style={styles.title}>{user.name}</Title>

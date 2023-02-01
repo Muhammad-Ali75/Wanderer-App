@@ -54,7 +54,7 @@ const HotelDetails = ({ route, navigation }) => {
       {
         response.data
           ? (alert('Payment Successful, Your Room is booked'),
-            navigation.goBack())
+            navigation.goBack('Hotel'))
           : alert('Something went wrong. Try Again!');
       }
     } catch (error) {
