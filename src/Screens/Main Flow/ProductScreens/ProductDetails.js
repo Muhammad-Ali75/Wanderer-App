@@ -62,7 +62,7 @@ const ProductDetails = ({ route, navigation }) => {
     <LinearGradient colors={['white', 'white']} style={styles.container}>
       <View style={styles.header}>
         <Image
-          style={{ height: '100%', width: 500 }}
+          style={{ height: '100%', width: 400 }}
           source={require('../../../../images/no-image.png')}
         />
         {/* <FlatList
@@ -128,7 +128,7 @@ const ProductDetails = ({ route, navigation }) => {
               colors={['#606A6D', '#14FC9B']}
               style={styles.SignIn}
             >
-              <Text style={styles.textSign}>Book Now</Text>
+              <Text style={styles.textSign}>Buy Now</Text>
             </LinearGradient>
           </TouchableOpacity>
         </View>
@@ -143,25 +143,22 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    flex: 3,
   },
   backButton: {
     position: 'absolute',
     alignSelf: 'flex-start',
-    top: '-80%',
+    top: '-118%',
     left: '5%',
   },
   footer: {
-    height: 400,
     backgroundColor: '#5B2C6F',
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
-    paddingVertical: 50,
-    paddingHorizontal: 30,
-    marginTop: -25,
-    flex: 1,
+    marginTop: '-10%',
+    padding: '5%',
+    paddingTop: '8%',
+    flex: 2,
   },
 
   logo: {
@@ -181,28 +178,28 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    alignItems: 'flex-end',
-    marginTop: 20,
+    alignSelf: 'center',
+    width: '100%',
+    maxWidth: 400,
+    marginTop: 80,
   },
 
   SignIn: {
-    width: 350,
     height: 50,
+    borderRadius: 10,
     justifyContent: 'center',
-    borderRadius: 50,
-    flexDirection: 'row',
   },
   textSign: {
     color: 'white',
     fontSize: 16,
-    marginTop: 15,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
   price: {
     color: 'gold',
+    textAlign: 'right',
     fontSize: 20,
     marginTop: -28,
-    textAlign: 'right',
   },
   reviewValue: {
     color: 'gold',

@@ -1,6 +1,6 @@
-import React from "react";
-import { Image, StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import React from 'react';
+import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const TourCard = ({ tour }) => {
   const navigation = useNavigation();
@@ -8,7 +8,7 @@ const TourCard = ({ tour }) => {
     <TouchableOpacity
       style={styles.card}
       onPress={() => {
-        navigation.navigate("TourDetails", { tourdetails: tour });
+        navigation.navigate('TourDetails', { tourdetails: tour });
       }}
     >
       <Image source={{ uri: tour.imageurls[0] }} style={styles.image} />
@@ -17,14 +17,14 @@ const TourCard = ({ tour }) => {
           <Text style={styles.nameText} ellipsizeMode="tail" numberOfLines={2}>
             {tour.name}
           </Text>
-          <Text style={{ color: "grey", marginLeft: 3 }}>{tour.city}</Text>
+          <Text style={{ color: 'grey', marginLeft: 3 }}>{tour.city}</Text>
         </View>
 
         <View style={styles.right}>
-          <Text style={{ color: "#F4A40E", fontSize: 20 }}>
+          <Text style={{ color: '#F4A40E', fontSize: 20 }}>
             Rs.{tour.rentperday}
           </Text>
-          <Text style={{ color: "grey", fontSize: 12 }}>Per Night </Text>
+          <Text style={{ color: 'grey', fontSize: 12 }}>Per Night </Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -36,48 +36,42 @@ export default TourCard;
 const styles = StyleSheet.create({
   card: {
     borderRadius: 20,
-    backgroundColor: "white",
+    backgroundColor: 'white',
+    alignItems: 'center',
     margin: 10,
-    height: 400,
-    elevation: 3,
+    height: '100%',
+    maxHeight: 380,
+    elevation: 2,
+    flex: 1,
   },
   image: {
-    margin: 30,
-    borderRadius: 10,
-    height: 250,
-    width: "88%",
+    borderRadius: 20,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
+    height: '100%',
+    maxHeight: 270,
+    width: '100%',
+    alignSelf: 'center',
   },
   info: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    margin: 30,
-    marginTop: -20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    paddingTop: 20,
   },
   nameText: {
     fontSize: 25,
-    color: "black",
-    maxWidth: "80%",
-  },
-  button: {
-    alignItems: "center",
-    marginTop: -20,
-  },
-  gradient: {
-    width: 200,
-    height: 45,
-    justifyContent: "center",
-    borderRadius: 10,
-    flexDirection: "row",
+    color: 'black',
+    fontWeight: 'bold',
   },
   text: {
-    color: "white",
+    color: 'white',
     fontSize: 16,
     marginTop: 13,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   right: {
     flex: 1,
-    alignItems: "flex-end",
-    paddingRight: 10,
+    marginTop: '1%',
   },
 });

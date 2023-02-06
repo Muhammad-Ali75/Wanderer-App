@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useCallback } from 'react';
 import {
   View,
   Text,
@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   FlatList,
+  BackHandler,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as Animatable from 'react-native-animatable';
@@ -15,6 +16,7 @@ import wandererAPI from '../../../api/Wanderer';
 import { Context as AuthContext } from '../../../Context/AuthContext';
 import StripeCheckout from 'react-native-simple-stripe';
 import { Overlay } from '@rneui/themed';
+import { useFocusEffect } from '@react-navigation/native';
 
 const TourDetails = ({ route, navigation }) => {
   const { tourdetails } = route.params;
@@ -28,15 +30,29 @@ const TourDetails = ({ route, navigation }) => {
   const [totalAmount, setTotalAmount] = useState();
   const [visible, setVisible] = useState(false);
 
+  useFocusEffect(
+    useCallback(() => {
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }, [navigation])
+  );
+
+  const onBackPress = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Tour' }],
+    });
+    return true;
+  };
+
   const toggleOverlay = () => {
     setVisible(!visible);
   };
   const calTotals = () => {
-    const oneDay = 1000 * 60 * 60 * 24;
-    const diffInTime = endDate.getTime() - startDate.getTime();
-    const diffInDays = Math.round(diffInTime / oneDay);
-    setTotalDays(diffInDays);
-    setTotalAmount(diffInDays * tourdetails.rentperday);
+    setTotalDays(10);
+    setTotalAmount(10 * tourdetails.rentperday);
   };
 
   const onToken = async (token) => {
@@ -71,7 +87,7 @@ const TourDetails = ({ route, navigation }) => {
           renderItem={({ item }) => {
             return (
               <Image
-                style={{ height: '100%', width: 500 }}
+                style={{ height: '100%', width: 380 }}
                 source={{ uri: item }}
               />
             );
@@ -81,7 +97,7 @@ const TourDetails = ({ route, navigation }) => {
       <Animatable.View animation="fadeInUpBig" style={styles.footer}>
         <TouchableOpacity
           style={styles.backButton}
-          onPress={() => navigation.goBack()}
+          onPress={() => onBackPress()}
         >
           <AntDesign name="arrowleft" size={30} color="white" />
         </TouchableOpacity>
@@ -105,8 +121,8 @@ const TourDetails = ({ route, navigation }) => {
           <DatePicker
             title={'End Date'}
             onChangeDate={onChangeEndDate}
-            value={startDate}
-            minimumDate={startDate}
+            value={new Date()}
+            minimumDate={new Date()}
           />
         </View>
         <Overlay
@@ -143,25 +159,22 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    flex: 3,
   },
   backButton: {
     position: 'absolute',
     alignSelf: 'flex-start',
-    top: '-80%',
+    top: '-118%',
     left: '5%',
   },
   footer: {
-    height: 400,
     backgroundColor: '#292929',
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
-    paddingVertical: 50,
-    paddingHorizontal: 30,
-    marginTop: -25,
-    flex: 1,
+    marginTop: '-10%',
+    padding: '5%',
+    paddingTop: '8%',
+    flex: 2,
   },
 
   logo: {
@@ -181,22 +194,22 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    alignItems: 'flex-end',
+    alignSelf: 'center',
+    width: '100%',
+    maxWidth: 400,
     marginTop: 10,
   },
 
   SignIn: {
-    width: 350,
     height: 50,
+    borderRadius: 10,
     justifyContent: 'center',
-    borderRadius: 50,
-    flexDirection: 'row',
   },
   textSign: {
     color: 'white',
     fontSize: 16,
-    marginTop: 15,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
   price: {
     color: 'gold',

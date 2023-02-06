@@ -113,6 +113,8 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container0: {
     flex: 1,
+    marginBottom: -18,
+    paddingBottom: 5,
   },
   headerContainer: {
     flex: 1,
@@ -138,7 +140,7 @@ const styles = StyleSheet.create({
   container1: {
     flex: 4,
     justifyContent: 'flex-start',
-    padding: 20,
+    padding: 10,
   },
   categoryText: {
     fontSize: 18,

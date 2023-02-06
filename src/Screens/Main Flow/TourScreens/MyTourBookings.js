@@ -65,7 +65,7 @@ const MyBookings = ({ navigation }) => {
     <View style={styles.container0}>
       <TouchableOpacity
         style={{
-          margin: 40,
+          margin: 30,
           marginBottom: 20,
           alignSelf: 'flex-start',
         }}
@@ -94,7 +94,6 @@ const MyBookings = ({ navigation }) => {
           );
         }}
       />
-      <View style={{ flex: 1 }} />
     </View>
   );
 };
@@ -104,13 +103,16 @@ export default MyBookings;
 const styles = StyleSheet.create({
   container0: {
     flex: 1,
-    alignItems: 'center',
+    justifyContent: 'center',
+
     backgroundColor: '#191919',
+    padding: 10,
   },
   header: {
     color: 'white',
     fontSize: 40,
     fontWeight: 'bold',
     marginBottom: 20,
+    textAlign: 'center',
   },
 });

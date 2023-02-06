@@ -61,7 +61,7 @@ const MyBookings = ({ navigation }) => {
   return (
     <View style={styles.container0}>
       <TouchableOpacity
-        style={{ margin: 40, marginBottom: 20, alignSelf: 'flex-start' }}
+        style={{ margin: 30, marginBottom: 20, alignSelf: 'flex-start' }}
         onPress={() => navigation.goBack()}
       >
         <AntDesign name="arrowleft" size={30} color="white" />
@@ -96,13 +96,15 @@ export default MyBookings;
 const styles = StyleSheet.create({
   container0: {
     flex: 1,
-    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: '#191919',
+    padding: 10,
   },
   header: {
     color: 'white',
     fontSize: 40,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 20,
+    textAlign: 'center',
   },
 });

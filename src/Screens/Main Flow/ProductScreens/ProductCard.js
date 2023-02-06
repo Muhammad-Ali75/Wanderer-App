@@ -17,13 +17,13 @@ const ProductCard = ({ product }) => {
       />
 
       <View style={styles.info}>
-        <View style={{ flex: 3 }}>
+        <View style={{ flex: 2 }}>
           <Text style={styles.nameText} ellipsizeMode="tail" numberOfLines={2}>
             {product.name}
           </Text>
         </View>
 
-        <View style={styles.right}>
+        <View style={{ flex: 1, marginTop: '1%' }}>
           <Text style={{ color: '#F4A40E', fontSize: 20 }}>
             Rs.{product.price}
           </Text>
@@ -34,65 +34,41 @@ const ProductCard = ({ product }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    paddingTop: 10,
-    paddingHorizontal: 10,
-    justifyContent: 'space-between',
-  },
-  name: {
-    fontWeight: 'bold',
-  },
-  price: {
-    fontWeight: 'bold',
-    color: '#00a46c',
-    paddingRight: 20,
-  },
   card: {
     borderRadius: 20,
     backgroundColor: 'white',
+    alignItems: 'center',
     margin: 10,
-    height: 400,
-    elevation: 3,
+    height: '100%',
+    maxHeight: 380,
+    elevation: 2,
+    flex: 1,
   },
   image: {
-    margin: 30,
-    borderRadius: 10,
-    height: 250,
-    width: '88%',
+    borderRadius: 20,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
+    height: '100%',
+    maxHeight: 270,
+    width: '100%',
+    alignSelf: 'center',
   },
   info: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    margin: 30,
-    marginTop: -20,
+    paddingHorizontal: 20,
+    paddingTop: 20,
   },
   nameText: {
     fontSize: 25,
     color: 'black',
-    maxWidth: '80%',
-  },
-  button: {
-    alignItems: 'center',
-    marginTop: -20,
-  },
-  gradient: {
-    width: 200,
-    height: 45,
-    justifyContent: 'center',
-    borderRadius: 10,
-    flexDirection: 'row',
+    fontWeight: 'bold',
   },
   text: {
     color: 'white',
     fontSize: 16,
     marginTop: 13,
     fontWeight: 'bold',
-  },
-  right: {
-    flex: 1,
-    alignItems: 'flex-end',
-    paddingRight: 10,
   },
 });
 

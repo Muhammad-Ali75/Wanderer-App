@@ -25,21 +25,27 @@ const BookingCard = ({ bookingData, onCancelPress }) => {
 
             <View style={{ margin: 10 }}>
               <Text style={{ color: 'green', fontWeight: 'bold' }}>Booked</Text>
-              <Text style={{ color: 'white' }}> {bookingData.fromdate}</Text>
-              <Text style={{ color: 'white' }}> {bookingData.todate}</Text>
+              <Text style={{ color: 'white' }}>{bookingData.fromdate}</Text>
+              <Text style={{ color: 'white' }}>{bookingData.todate}</Text>
               <Text style={{ color: 'yellow' }}>
-                {' Rs.  '}
-                {bookingData.totalamount}
+                Rs. {bookingData.totalamount}
               </Text>
             </View>
           </View>
         </View>
         {/* RIGHT container */}
         <View style={styles.rightContainer}>
-          <Text style={{ color: 'gold', marginLeft: 7, fontSize: 18 }}>
+          <Text
+            style={{
+              color: 'gold',
+              marginLeft: 0,
+              fontSize: 16,
+              textAlign: 'center',
+            }}
+          >
             Total Days:
           </Text>
-          <Text style={{ color: 'green', marginLeft: 7, fontSize: 18 }}>
+          <Text style={{ color: 'green', marginLeft: 7, fontSize: 16 }}>
             {bookingData.totaldays}
           </Text>
         </View>
@@ -59,8 +65,7 @@ export default BookingCard;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '100%',
-    maxWidth: 400,
+
     elevation: 5,
     margin: 8,
     backgroundColor: '#292929',
@@ -87,7 +92,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
     justifyContent: 'flex-end',
-    padding: 12,
+    paddingTop: 12,
   },
   name: {
     fontSize: 30,
@@ -98,7 +103,7 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: 'red',
     height: 50,
-    width: 400,
+    width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
     borderBottomLeftRadius: 15,

@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
+import * as Animatable from 'react-native-animatable';
+
 import ProductCard from './ProductCard';
 import wandererApi from '../../../api/Wanderer';
 import SearchBar from '../../../Components/SearchBar';
@@ -60,14 +62,22 @@ const Products = ({ navigation }) => {
       <View style={styles.header}>
         <View style={styles.header2}>
           <TouchableOpacity
-            style={{ marginTop: 35 }}
+            style={{ marginTop: '10%' }}
             onPress={() => navigation.goBack()}
           >
             <AntDesign name="arrowleft" size={30} color="white" />
           </TouchableOpacity>
 
           <View style={styles.container}>
-            <Text style={styles.text}>Get items for your trip.</Text>
+            <Animatable.View
+              animation="fadeIn"
+              duration={3000}
+              style={{ flex: 2 }}
+            >
+              <Text style={styles.text} numberOfLines={2}>
+                Get items for your trip.
+              </Text>
+            </Animatable.View>
             <View style={styles.logoContainer}>
               <Image
                 source={require('../../../../images/w2.jpg')}
@@ -100,15 +110,10 @@ const styles = StyleSheet.create({
   },
   header2: {
     backgroundColor: '#5B2C6F',
-    height: '100%',
+    flex: 1,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
     paddingHorizontal: 20,
-
-    flex: 1,
-  },
-  backArrow: {
-    marginTop: 35,
   },
   container: {
     flexDirection: 'row',
@@ -120,11 +125,10 @@ const styles = StyleSheet.create({
     fontSize: 28,
     color: '#FFF',
     fontWeight: 'bold',
-    marginTop: 10,
   },
   logoContainer: {
     alignItems: 'flex-end',
-    marginTop: 35,
+    flex: 1,
   },
   logo: {
     height: 60,

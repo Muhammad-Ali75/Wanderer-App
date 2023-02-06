@@ -54,7 +54,7 @@ const Hotels = ({ navigation }) => {
       <View style={styles.header}>
         <View style={styles.header2}>
           <TouchableOpacity
-            style={{ marginTop: 35 }}
+            style={{ marginTop: '10%' }}
             onPress={() => navigation.goBack()}
           >
             <AntDesign name="arrowleft" size={30} color="white" />
@@ -63,7 +63,7 @@ const Hotels = ({ navigation }) => {
             <Animatable.View
               animation="fadeIn"
               duration={3000}
-              style={{ width: '50%' }}
+              style={{ flex: 2 }}
             >
               <Text style={styles.text}>Where would you want to stay ? </Text>
             </Animatable.View>
@@ -99,35 +99,25 @@ const styles = StyleSheet.create({
   },
   header2: {
     backgroundColor: '#6B3940',
-    height: '100%',
+    flex: 1,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
     paddingHorizontal: 20,
-    flex: 1,
-  },
-  backArrow: {
-    marginTop: 50,
-    marginLeft: 5,
-    tintColor: 'white',
-    width: '5%',
-    height: 13,
   },
   container: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    width: '100%',
-    marginTop: 0,
+    flex: 1,
   },
   text: {
     fontSize: 28,
     color: '#FFF',
     fontWeight: 'bold',
-    marginTop: 10,
   },
   logoContainer: {
     alignItems: 'flex-end',
-    marginTop: 35,
+    flex: 1,
   },
   logo: {
     height: 60,

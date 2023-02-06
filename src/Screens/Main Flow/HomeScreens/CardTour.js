@@ -42,6 +42,8 @@ const styles = StyleSheet.create({
     height: '70%',
     width: '100%',
     overflow: 'hidden',
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
   },
   titleContainer: {
     paddingTop: 10,

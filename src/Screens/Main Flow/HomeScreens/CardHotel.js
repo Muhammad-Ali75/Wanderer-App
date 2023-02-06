@@ -31,7 +31,7 @@ export default CardHotel;
 
 const styles = StyleSheet.create({
   card: {
-    height: '92%',
+    height: '90%',
     width: 300,
     elevation: 2,
     backgroundColor: '#FFF',
@@ -44,10 +44,12 @@ const styles = StyleSheet.create({
     height: '70%',
     width: '100%',
     overflow: 'hidden',
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
   },
   titleContainer: {
     flexDirection: 'row',
-    paddingTop: 10,
+    paddingTop: 5,
     paddingLeft: 10,
   },
   title: {
@@ -66,6 +68,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     fontWeight: 'bold',
     color: '#b1e5d3',
-    paddingTop: 3,
   },
 });

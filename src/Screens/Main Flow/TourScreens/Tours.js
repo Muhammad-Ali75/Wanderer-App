@@ -55,7 +55,7 @@ const Tour = ({ navigation }) => {
       <View style={styles.header}>
         <View style={styles.header2}>
           <TouchableOpacity
-            style={{ marginTop: 35 }}
+            style={{ marginTop: '8%' }}
             onPress={() => navigation.goBack()}
           >
             <AntDesign name="arrowleft" size={30} color="white" />
@@ -64,7 +64,7 @@ const Tour = ({ navigation }) => {
             <Animatable.View
               animation="fadeIn"
               duration={3000}
-              style={{ width: '50%' }}
+              style={{ flex: 2 }}
             >
               <Text style={styles.text}>Where would you want to go ? </Text>
             </Animatable.View>
@@ -105,29 +105,28 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   backArrow: {
-    marginTop: 50,
+    marginTop: '0%',
     tintColor: 'white',
   },
   container: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: 20,
+    flex: 1,
   },
   text: {
     fontSize: 28,
     color: '#FFF',
     fontWeight: 'bold',
-    marginTop: 10,
   },
   logoContainer: {
     alignItems: 'flex-end',
-    marginTop: 35,
+    flex: 1,
   },
   logo: {
     height: 60,
     width: 60,
-    borderRadius: 30,
+    borderRadius: 50,
   },
 });
 export default Tour;

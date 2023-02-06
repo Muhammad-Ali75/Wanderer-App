@@ -1,5 +1,4 @@
-import React, { useState, useContext } from 'react';
-
+import React, { useState, useContext, useCallback } from 'react';
 import {
   View,
   Text,
@@ -7,7 +6,10 @@ import {
   Image,
   TouchableOpacity,
   FlatList,
+  BackHandler,
 } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
+
 import { LinearGradient } from 'expo-linear-gradient';
 import * as Animatable from 'react-native-animatable';
 import { AntDesign } from '@expo/vector-icons';
@@ -28,6 +30,23 @@ const HotelDetails = ({ route, navigation }) => {
   const [totalDays, setTotalDays] = useState(0);
   const [totalAmount, setTotalAmount] = useState();
   const [visible, setVisible] = useState(false);
+
+  useFocusEffect(
+    useCallback(() => {
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }, [navigation])
+  );
+
+  const onBackPress = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Hotel' }],
+    });
+    return true;
+  };
 
   const toggleOverlay = () => {
     setVisible(!visible);
@@ -82,7 +101,7 @@ const HotelDetails = ({ route, navigation }) => {
       <Animatable.View animation="fadeInUpBig" style={styles.footer}>
         <TouchableOpacity
           style={styles.backButton}
-          onPress={() => navigation.goBack()}
+          onPress={() => onBackPress()}
         >
           <AntDesign name="arrowleft" size={30} color="white" />
         </TouchableOpacity>
@@ -96,7 +115,13 @@ const HotelDetails = ({ route, navigation }) => {
         <Text style={styles.description}>Description:</Text>
         <Text style={styles.text}>{hoteldetails.discription}</Text>
 
-        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+            alignSelf: 'flex-end',
+          }}
+        >
           <DatePicker
             title={'Start Date'}
             onChangeDate={onChangeStartDate}
@@ -138,30 +163,28 @@ const HotelDetails = ({ route, navigation }) => {
 };
 
 export default HotelDetails;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
   header: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    flex: 3,
   },
   backButton: {
     position: 'absolute',
     alignSelf: 'flex-start',
-    top: '-80%',
+    top: '-118%',
     left: '5%',
   },
   footer: {
-    height: 400,
     backgroundColor: '#6B3940',
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
-    paddingVertical: 50,
-    paddingHorizontal: 30,
-    marginTop: -25,
-    flex: 1,
+    marginTop: '-10%',
+    padding: '5%',
+    paddingTop: '8%',
+    flex: 2,
   },
 
   logo: {
@@ -173,7 +196,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 23,
     fontWeight: 'bold',
-    maxWidth: '55%',
+    width: '63%',
   },
 
   text: {
@@ -182,28 +205,28 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    alignItems: 'flex-end',
+    alignSelf: 'center',
+    width: '100%',
+    maxWidth: 400,
     marginTop: 10,
   },
 
   SignIn: {
-    width: 350,
     height: 50,
+    borderRadius: 10,
     justifyContent: 'center',
-    borderRadius: 50,
-    flexDirection: 'row',
   },
   textSign: {
     color: 'white',
     fontSize: 16,
-    marginTop: 15,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
   price: {
     color: 'gold',
+    textAlign: 'right',
     fontSize: 20,
     marginTop: -28,
-    textAlign: 'right',
   },
   reviewValue: {
     color: 'gold',

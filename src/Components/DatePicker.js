@@ -4,13 +4,15 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { AntDesign } from '@expo/vector-icons';
 
 const DatePicker = ({ title, onChangeDate, value, minimumDate }) => {
-  const [date, changedate] = useState();
+  const [date, changedate] = useState('');
   const [show, setShow] = useState(false);
 
-  const onChange = (event, selectedDate) => {
+  const onChange = async (event, selectedDate) => {
+    console.log(event);
+    console.log(selectedDate);
     if (event.type == 'dismissed') {
-      changedate(null);
-      setShow(false);
+      changedate(() => '');
+      setShow(() => false);
     } else {
       const currentDate = selectedDate;
       let tempDate = new Date(currentDate);
@@ -21,15 +23,14 @@ const DatePicker = ({ title, onChangeDate, value, minimumDate }) => {
         '-' +
         tempDate.getFullYear();
 
-      changedate(fDate);
+      changedate(() => fDate);
       onChangeDate(new Date(currentDate));
-      setShow(false);
+      setShow(() => false);
     }
   };
-
   return (
     <TouchableOpacity style={styles.button} onPress={() => setShow(true)}>
-      {date == null ? (
+      {date == '' ? (
         <Text type="date" style={styles.text}>
           {title}
         </Text>
@@ -53,15 +54,14 @@ export default DatePicker;
 const styles = StyleSheet.create({
   button: {
     flexDirection: 'row',
-    alignContent: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
     borderColor: 'gold',
+    margin: '2%',
     borderRadius: 10,
     borderWidth: 1,
-    margin: 20,
-    paddingTop: 9,
     height: 50,
-    width: 220,
+    width: '100%',
     flex: 1,
   },
   text: {
