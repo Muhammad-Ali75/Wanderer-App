@@ -24,7 +24,7 @@ const TourCard = ({ tour }) => {
           <Text style={{ color: '#F4A40E', fontSize: 20 }}>
             Rs.{tour.rentperday}
           </Text>
-          <Text style={{ color: 'grey', fontSize: 12 }}>Per Night </Text>
+          <Text style={{ color: 'grey', fontSize: 12 }}>Per Day </Text>
         </View>
       </View>
     </TouchableOpacity>
